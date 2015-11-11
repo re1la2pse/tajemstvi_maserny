@@ -1,0 +1,90 @@
+{include file='inc/header.html'}
+
+
+<div class="content">
+
+    <section>
+        <div id="contactSection" class="container small-section">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-1 contactColumn">
+                    <h3>Kontakt:</h3>
+                    <a href="https://www.facebook.com/TajemstviMaserny"><div id="fb-icon"></div> </a>
+
+                    <ul>
+                        <li><h4>Monika Páclová</h4></li>
+                        <li>tet.: 739 513 425</li>
+                        <li>e-mail: info@tajemstvimaserny.cz</li>
+                        <li></li>
+                        <li>adresa: 28.října 548/8, Ostrava</li>
+                        <li>v pracovní dny od 10 do 17 hod.</li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6  voucherColumn" >
+                    <div class="mapWrapper">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.7631899629077!2d18.25623391361843!3d49.828115879749674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713e36ce241705d%3A0xefe384861a722c7e!2zMjguIMWZw61qbmEsIE9zdHJhdmE!5e0!3m2!1scs!2scz!4v1447174422027" width="550" height="200" frameborder="0" class="googleMap"  allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container sectionBetweenSection">
+        </div>
+    </section>
+
+<!-- Contact Section -->
+    <section>
+        <div id="contact" class="container section">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Napište nám</h2>
+                    <h3 class="section-subheading text-muted">Kontaktní formulář.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Vaše jméno *" id="name" required data-validation-required-message="Vložte jméno.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Váš email *" id="email" required data-validation-required-message="Vložte email.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Váš telefon *" id="phone" required data-validation-required-message="Vložte tel. číslo.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Vaše zpráva *" id="message" required data-validation-required-message="Vložte zprávu."></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-xl">Odeslat zprávu</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container sectionBetweenSection">
+        </div>
+    </section>
+
+
+</div>
+
+{include file='inc/footer.html'}

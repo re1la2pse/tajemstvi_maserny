@@ -1,0 +1,22 @@
+
+        {if !isset($galerie)}
+        <!-- jQuery -->
+            <script src="media/js/jquery.js"></script>
+        {/if}
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="media/js/bootstrap.min.js"></script>
+        <script src="media/js/jqBootstrapValidation.js"></script>
+        <script src="media/js/contact_me.js"></script>
+        <script src="media/js/main.js"></script>
+        
+        <!-- slim box -->
+        {if isset($galerie)}
+            <script src="media/js/mootools.js"></script>
+            <script src="media/js/slimbox.js"></script>
+        {/if}
+        
+        <script src="media/js/{$js_script}.js"></script>
+    </body>
+
+</html>

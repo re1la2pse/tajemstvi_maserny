@@ -1,0 +1,37 @@
+
+.imgLink {
+    display: block;
+    width: 248px;
+    height: 168px;
+    background-color: #660000;
+    padding: 3px;
+    border-radius: 10px;
+    margin-bottom: 45px;
+    /*margin: auto auto;*/
+}
+
+.fotoItem {
+    position: relative;
+    display: block;
+    border: 3px solid #fec503;
+    border-radius: 10px;
+    margin: 0 auto;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+
+.fotoItem:hover {
+    opacity: 0.5;
+}
+
+.img_wrapper {
+    /*display: flex;*/
+    /*width: 248px;
+    height: 168px;*/
+    /*background-color: #660000;*/
+    /*background-color: blue;*/
+    /*margin-bottom: 45px;
+    background-color: white;*/
+}

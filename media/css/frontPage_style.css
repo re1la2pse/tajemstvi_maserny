@@ -1,0 +1,138 @@
+
+
+/* Slider */
+.carousel {
+    height: 90%;
+}
+
+.item,
+.active,
+.carousel-inner {
+    height: 100%;
+}
+
+/* Fotky na pozadi jsou nastaveny v indexu pomoci inline CSS*/
+
+.fill {
+    width: 100%;
+    height: 100%;
+    background-position: center bottom;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+/* end slider */
+
+#services .box {
+  padding-bottom: 0;
+}
+
+#services .row > div {
+  margin-bottom: 50px;
+}
+
+/*
+#about_us {
+    position: relative;
+    z-index: 10;
+    margin-top: -100px;
+}*/
+
+#services {
+    position: relative;
+    z-index: 10;
+    margin-top: -100px;
+}
+
+#uvodText {
+    
+}
+
+.obrazek:hover {
+    border: 3px solid #660000;
+    opacity: 0.4;
+}
+
+/*** contact section ***/
+
+#contactSection {
+    text-align: left;
+}
+
+#contactSection ul {
+    margin-top: 30px;
+    list-style: none;
+}
+
+#contactSection .contactColumn h3 {
+    margin-left: 40px;
+}
+
+#contactSection .voucherColumn {
+   /* border: 1px solid green;*/
+}
+
+#voucher {
+   /* border: 1px solid blue;*/
+    border-radius: 10px;
+    width: 400px;
+    height: 100px;
+    margin-top: 30px;
+    background-color: darkred;
+    background-image: url('../img/voucher.png');
+}
+
+#fb-icon {
+    position: absolute;
+    left: 100px;
+    bottom: 130px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/fb-icon.png');
+   /* border: 1px solid blue;*/
+    margin-left: 100px;
+}
+
+
+/****** @media ****/
+@media(max-width:1024px) {
+    #logo {
+        font-size: 30pt;
+    }
+    .carousel {
+        height: 90%;
+        position: relative;
+        z-index: 0;
+    }
+}
+
+@media(max-width:768px) {
+    #logo {
+        font-size: 23pt;
+    }
+    
+    #logoDiv {
+        /*border: 1px solid green;*/
+        top: 20%;
+    }
+    
+    .carousel {
+        height: 90%;
+        position: relative;
+        z-index: 0;
+    }
+}
+
+@media screen and (max-height:768px) {
+    .carousel {
+        height: 100%;
+        position: relative;
+        z-index: 0;
+    }
+}
+
+
+
+
+

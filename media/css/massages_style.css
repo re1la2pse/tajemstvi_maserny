@@ -1,0 +1,69 @@
+
+.massage {
+    padding: 15px 0;
+}
+
+.massage h3 {
+    color:  #fed136;
+    text-shadow: black 3px 3px 12px;
+}
+
+.massage p {
+    text-align: justify;
+    padding: 20px 0;
+}
+
+#left_menu h4{
+   /* cursor: pointer;*/
+}
+
+ul.no_list_style {
+    list-style: none;
+}
+
+ul .menu_item {
+    cursor: pointer;
+}
+
+.left_column {
+    text-align: left;
+}
+
+.right_column {
+    border-left: 1px solid #560000;
+}
+
+.col1 {
+    /*border: 1px solid blue;*/
+    margin-top: 50px;
+    text-align: left;
+}
+
+
+.col2 {
+   /* border: 1px solid green;*/
+}
+
+.priceTable .price h3 {
+    text-transform: none;
+}
+
+.priceTable .price {
+    float: right;
+}
+
+.priceTable .price span {
+    font-size: 13pt;
+    padding-right: 10px;
+}
+
+.priceTable hr {
+    height: 1px;
+    border: 0;
+    background-color: #fec503; 
+}
+
+table td {
+    padding: 5px 10px;
+    color: #C2C2C2;
+}

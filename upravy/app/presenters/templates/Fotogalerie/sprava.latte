@@ -1,0 +1,47 @@
+{block content}
+
+<div class="container content">
+
+    <h2>Správa fotek</h2>
+
+    <p>
+        Skrytí/zobrazení fotek a mazání.
+    </p>
+
+    {form changeForm}
+
+    <ul class="errors" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $error">{$error}</li>
+    </ul>
+
+    <div class="row">
+            <!--<table>-->
+            {foreach $form->controls as $name => $field}
+
+                {if (($iterator->getCounter() - 1)  % 3) == 0}
+                   {if !$iterator->isFirst()}
+                    </table>
+                    </div>
+                   {/if}
+                    <div class="col-lg-4">
+                    <table>
+                {/if}
+
+                <tr>
+                     <td>{input $name}</td>
+                     <td>{label $name /}</td>
+                </tr>
+            {/foreach}
+            </table>
+            </div>
+            {/form}
+    </div>
+
+
+</div>
+
+
+
+
+
+

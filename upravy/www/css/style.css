@@ -1,0 +1,28 @@
+
+html, body {
+    background-color: #E4E4E4;
+}
+
+.center {
+    text-align: center;
+}
+
+.flash {
+    text-align: center;
+    padding: 5px;
+    border: 2px solid orange;
+    border-radius: 10px;
+    font-weight: bold;
+    color: orange;
+    background-color: #FFF0E5;*/
+}
+
+.error {
+    /* border: 2px solid red;*/
+    width: 100%;
+    font-size: 12pt;
+    font-weight: bold;
+    color: red;
+    padding: 5px;
+    text-align: center;
+}

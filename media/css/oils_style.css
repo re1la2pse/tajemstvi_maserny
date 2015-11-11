@@ -1,0 +1,16 @@
+
+.push_right {
+    /*border: 1px solid green;*/
+    margin: 20px 0 0 30px;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background-color: #fec503;
+    margin-top: 0px;
+}
+
+.price {
+    float: right;
+}

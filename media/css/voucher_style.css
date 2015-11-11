@@ -1,0 +1,8 @@
+
+#voucherImg {
+    width: 350px;
+    height: 166px;
+    border: 2px solid white;
+    background-image: url(../img/poukaz.png);
+    margin-top: 25px;
+}
