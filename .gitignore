@@ -1,0 +1,6 @@
+# ignorovane soubory git
+
+/models/smarty/c_templates/*
+.idea/
+/upravy/temp/
+/media/img/fotogalerie/
