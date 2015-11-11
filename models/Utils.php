@@ -46,7 +46,7 @@ class Utils {
            // self::$smarty->debugging = true;
 
             if($_SERVER['SERVER_NAME'] == 'localhost') {
-                self::$smarty->assign('ROOT', '/procha_projekt_git');
+                self::$smarty->assign('ROOT', '/tajemstvi_maserny');
             } else {
                 self::$smarty->assign('ROOT', '');
             }
