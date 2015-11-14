@@ -7,7 +7,7 @@
             {foreach from=$photos key=key item=photo}
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="img_wrapper">
-                        <a href="{$photo['plna']}" rel="lightbox-group" class="imgLink"><img src="{$photo['miniatura']}" alt="" class="fotoItem"></a>
+                        <a href="{$ROOT}/{$photo['plna']}" rel="lightbox-group" class="imgLink"><img src="{$ROOT}/{$photo['miniatura']}" alt="" class="fotoItem"></a>
                     </div>
                 </div>
             {/foreach}
