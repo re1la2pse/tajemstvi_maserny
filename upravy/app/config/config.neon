@@ -27,3 +27,4 @@ services:
 	router: App\RouterFactory::createRouter
 	- App\Model\GalerieModel
 	- App\Model\UserManager
+	- App\Model\MassagesModel

@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `login`, `password`) VALUES
-(1, 'admin', '123456');
+(1, 'admin', 'admin');
 
 --
 -- Klíče pro exportované tabulky
@@ -85,3 +85,32 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+--
+--Kategorie masazi
+--
+CREATE TABLE IF NOT EXIST `kategorie_masazi` 
+( `id_kat` INT NOT NULL AUTO_INCREMENT , 
+`nazev` VARCHAR(40) NOT NULL , 
+PRIMARY KEY (`id_kat`)) ENGINE = InnoDB;
+
+--
+--Kategorie vložení
+--
+INSERT INTO `fotogalerie`.`kategorie_masazi` (`id_kat`, `nazev`) 
+VALUES (NULL, 'Rekondiční'), 
+	(NULL, 'Relaxační'), 
+	(NULL, 'Přístrojové'), 
+	(NULL, 'Detoxikační'), 
+	(NULL, 'Speciální péče');
+
+--
+--Masaze
+--
+CREATE TABLE IF NOT EXIST `masaze`
+( `id_masaze` INT NOT NULL , 
+`nazev` VARCHAR(40) NOT NULL , 
+`popis` TEXT NOT NULL , 
+`id_kategorie` INT NOT NULL , 
+PRIMARY KEY (`id_masaze`)) ENGINE = InnoDB;
+
