@@ -13,29 +13,56 @@
     <ul class="errors" n:if="$form->hasErrors()">
         <li n:foreach="$form->errors as $error">{$error}</li>
     </ul>
-
-    <div class="row">
-            <!--<table>-->
+            
+            <!-- 4 itemy na jeden radek -->
             {foreach $form->controls as $name => $field}
-
+            
                 {if (($iterator->getCounter() - 1)  % 3) == 0}
                    {if !$iterator->isFirst()}
+                        </table>
+                        </div>
+                        {if (($iterator->getCounter() - 1)  % 12) == 0}
+                            </div>
+                        {/if}
+                   {/if}
+                   
+                   {if (($iterator->getCounter() - 1)  % 12) == 0}
+                        <div class="row">
+                   {/if}
+                   
+                   <div class="col-lg-3">
+                   <table>
+                {/if}
+                
+                {if $name == "send"}
                     </table>
                     </div>
-                   {/if}
-                    <div class="col-lg-4">
-                    <table>
-                {/if}
-
-                <tr>
-                     <td>{input $name}</td>
-                     <td>{label $name /}</td>
-                </tr>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4">
+                            {input $name class => "btn btn-primary"}    
+                            {label $name /}
+                        </div>
+                    </div>
+                   
+                   <!-- Na konci je jeste nejaky skryty control-->
+                   <div class="row"> 
+                   <div class="col-lg-3">
+                   <table>
+                    
+                {else}
+                    <tr>
+                         <td>{input $name}</td>
+                         <td>{label $name /}</td>
+                    </tr>
+                {/if}  
+                
             {/foreach}
             </table>
             </div>
+            </div>
             {/form}
-    </div>
 
 
 </div>

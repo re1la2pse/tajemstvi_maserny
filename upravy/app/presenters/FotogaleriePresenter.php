@@ -66,5 +66,7 @@ class FotogaleriePresenter extends BasePresenter
     }
 
     public function renderSprava() {
+        
+        $this->template->style = "sprava_fotogalerie_style"; 
     }
 }
