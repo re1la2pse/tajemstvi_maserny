@@ -35,7 +35,7 @@ class ChangePictureForm extends BaseBT3Form {
               $form['zobrazit'.$picture['id_fotky']]->setDefaultValue('1');
         }
 
-        $form->addSubmit('send2', 'Uložit změny');
+        $form->addSubmit('send', 'Uložit změny');
 
         return $form;
     }
