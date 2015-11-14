@@ -91,13 +91,14 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 CREATE TABLE IF NOT EXIST `kategorie_masazi` 
 ( `id_kat` INT NOT NULL AUTO_INCREMENT , 
-`nazev` VARCHAR(40) NOT NULL , 
+`nazev` VARCHAR(40) NOT NULL ,
+`popis` TEXT NOT NULL ,
 PRIMARY KEY (`id_kat`)) ENGINE = InnoDB;
 
 --
 --Kategorie vložení
 --
-INSERT INTO `fotogalerie`.`kategorie_masazi` (`id_kat`, `nazev`) 
+INSERT INTO `kategorie_masazi` (`id_kat`, `nazev`)
 VALUES (NULL, 'Rekondiční'), 
 	(NULL, 'Relaxační'), 
 	(NULL, 'Přístrojové'), 
@@ -110,7 +111,9 @@ VALUES (NULL, 'Rekondiční'),
 CREATE TABLE IF NOT EXIST `masaze`
 ( `id_masaze` INT NOT NULL , 
 `nazev` VARCHAR(40) NOT NULL , 
-`popis` TEXT NOT NULL , 
-`id_kategorie` INT NOT NULL , 
+`popis` TEXT NOT NULL ,
+`cas` TEXT NOT NULL ,
+`cena` INT NOT NULL ,
+`id_kategorie` INT NOT NULL ,
 PRIMARY KEY (`id_masaze`)) ENGINE = InnoDB;
 

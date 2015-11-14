@@ -3,23 +3,21 @@
 
 <div class="container content">
 
-    <h2>Správa fotek</h2>
+    <h2>Správa masáží</h2>
 
-<a n:href="Massages:uprava"> Uprava </a>
-
-{*
-<ul>
-{foreach $kategorie as $kat}
-    {foreach $kat as $ka => $masaze}
-        <li>{$ka}</li>
+    <ul>
+    {foreach $kategorie as $katId => $kat}
+        <li><a n:href="Massages:upravaK, 'kategorie' => $katId">{$kat}</a></li>
         <ul>
-        {foreach $masaze as $masaz}
-            <li>{$masaz}</li>
+        {foreach $masaze[$katId] as $masazId => $masaz}
+            <li><a n:href="Massages:upravaM, 'masaz' => $masazId">{$masaz}</a></li>
         {/foreach}
         </ul>
     {/foreach}
-{/foreach}
-</ul>
-*}
+    </ul>
+
+    <a n:href="Massages:upravaK">Nová kategorie</a>
+    <br>
+    <a n:href="Massages:upravaM">Nová masáž</a>
 
 </div>

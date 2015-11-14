@@ -12,6 +12,7 @@ use Nette;
 use Forms;
 use App\Model\MassagesModel;
 use Nette\Utils\Arrays;
+use Tracy\Debugger;
 
 class MassagesPresenter extends BasePresenter {
 
@@ -21,63 +22,70 @@ class MassagesPresenter extends BasePresenter {
      */
     public $massagesModel;
 
-    //Sprava
-    public function createComponentLoadMassagesForm() {
+    //Massaz
+    public function createComponentMassagesForm() {
 
-        $form = (new Forms\LoadMassagesForm())->create();
+        $masaz = NULL;
 
-        $form->onSuccess[] = array($this, 'loadFormSucceeded');
+        if ($id = $this->getParameter('masaz')) {
+            $masaz = $this->massagesModel->getMassage($id);
+        }
 
-        return $form;
-    }
+        $form = (new Forms\MassagesForm())->create($this->massagesModel->getKategoriePole(), $masaz);
 
-    public function loadFormSucceeded($form) {
-        //$values = $form->getValues();
-
-        $this->flashMessage("Masáže uloženy");
-        $this->redirect('Massages:sprava');
-    }
-
-    //Uprava
-    public function createComponentUpravaMassagesForm() {
-
-        $form = (new Forms\UpravaMassagesForm())->create();
-
-        $form->onSuccess[] = array($this, 'upravaFormSucceeded');
+        $form->onSuccess[] = array($this, 'massageFormSucceeded');
 
         return $form;
     }
 
-    public function upravaFormSucceeded($form) {
-        //$values = $form->getValues();
+    public function massageFormSucceeded($form) {
+
+        $values = $form->getValues();
+
+        $this->massagesModel->insertMassage($values);
 
         $this->flashMessage("Masáž uložena");
         $this->redirect('Massages:sprava');
     }
 
+    //Kategorie
+    public function createComponentKategorieForm() {
+
+        $kategorie = NULL;
+
+        if ($id = $this->getParameter('kategorie')) {
+            $kategorie = $this->massagesModel->getKategorii($id);
+        }
+        $form = (new Forms\KategorieForm())->create($kategorie);
+
+        $form->onSuccess[] = array($this, 'kategorieFormSucceeded');
+
+        return $form;
+    }
+
+    public function kategorieFormSucceeded($form) {
+
+        $values = $form->getValues();
+
+        $this->massagesModel->insertKategorie($values);
+
+        $this->flashMessage("Kategorie uložena");
+        $this->redirect('Massages:sprava');
+    }
 
 
-    public function  renderUprava() {
+
+    public function  renderUpravaK() {
+
+    }
+
+    public function  renderUpravaM() {
 
     }
 
     public function renderSprava() {
-        /*
-        $kategorie = $this->massagesModel->getKategorie();
-
-        $masaze = array(); //= new Nette\Utils\ArrayHash();
-
-        foreach ($kategorie as $kat) {
-            $m = array();
-            $mas = $this->massagesModel->getMassagesK($kat['id_kategorie']);
-            foreach ($mas as $ma) {
-                $m[] = $ma['nazev'];
-            }
-            $masaze[] = array($kat['nazev'] => $m);
-        }
-
-        $this->template->kategorie = $masaze;
-        */
+        $this->template->kategorie = $this->massagesModel->getKategoriePole();
+        $this->template->masaze = $this->massagesModel->getMassagesArray2();
     }
 
 }
