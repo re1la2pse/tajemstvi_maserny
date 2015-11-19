@@ -36,6 +36,9 @@ class MassagesForm extends BaseBT3Form {
         $form->addHidden('id_masaze', NULL);
         $form->addSubmit('uloz', 'Uložit');
 
+        $form['popis']->getControlPrototype()->class('ckeditor');
+        $form->getElementPrototype()->onsubmit('CKEDITOR.instances["' . $form['popis']->getHtmlId() . '"].updateElement()');
+
         if ($masaz) {
             $form->setDefaults(array(
                 'nazev' => $masaz['nazev'],
