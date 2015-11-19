@@ -13,7 +13,7 @@ namespace Latte;
  */
 class Engine extends Object
 {
-	const VERSION = '2.3.6';
+	const VERSION = '2.3.7';
 
 	/** Content types */
 	const CONTENT_HTML = 'html',
@@ -87,7 +87,11 @@ class Engine extends Object
 	{
 		$class = $this->getTemplateClass($name);
 		if (!class_exists($class, FALSE)) {
-			$this->loadCacheFile($name);
+			if ($this->tempDirectory) {
+				$this->loadTemplateFromCache($name);
+			} else {
+				$this->loadTemplate($name);
+			}
 		}
 
 		$template = new $class($params, $this, $name);
@@ -162,7 +166,7 @@ class Engine extends Object
 
 		$class = $this->getTemplateClass($name);
 		if (!class_exists($class, FALSE)) {
-			$this->loadCacheFile($name);
+			$this->loadTemplateFromCache($name);
 		}
 	}
 
@@ -170,13 +174,8 @@ class Engine extends Object
 	/**
 	 * @return void
 	 */
-	private function loadCacheFile($name)
+	private function loadTemplateFromCache($name)
 	{
-		if (!$this->tempDirectory) {
-			eval('?>' . $this->compile($name));
-			return;
-		}
-
 		$file = $this->getCacheFile($name);
 
 		if (!$this->isExpired($file, $name) && (@include $file) !== FALSE) { // @ - file may not exist
@@ -193,18 +192,37 @@ class Engine extends Object
 		}
 
 		if (!is_file($file) || $this->isExpired($file, $name)) {
-			$code = $this->compile($name);
+			$code = $this->loadTemplate($name);
 			if (file_put_contents("$file.tmp", $code) !== strlen($code) || !rename("$file.tmp", $file)) {
 				@unlink("$file.tmp"); // @ - file may not exist
 				throw new \RuntimeException("Unable to create '$file'.");
 			}
-		}
 
-		if ((include $file) === FALSE) {
+		} elseif ((include $file) === FALSE) {
 			throw new \RuntimeException("Unable to load '$file'.");
 		}
 
 		flock($handle, LOCK_UN);
+	}
+
+
+	/**
+	 * @return string
+	 */
+	private function loadTemplate($name)
+	{
+		$code = $this->compile($name);
+		try {
+			if (@eval('?>' . $code) === FALSE) { // @ is escalated to exception
+				$error = error_get_last();
+				$e = new CompileException('Error in template: ' . $error['message']);
+				throw $e->setSource(NULL, NULL, $name);
+			}
+		} catch (\ParseError $e) {
+			$e = new CompileException('Error in template: ' . $e->getMessage(), 0, $e);
+			throw $e->setSource(NULL, NULL, $name);
+		}
+		return $code;
 	}
 
 

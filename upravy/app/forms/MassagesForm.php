@@ -34,6 +34,7 @@ class MassagesForm extends BaseBT3Form {
             ->setRequired('Cena musí být vyplněna')
             ->addRule(Form::INTEGER, 'Cena musí být číslo');
         $form->addHidden('id_masaze', NULL);
+        $form->addSubmit('uloz', 'Uložit');
 
         if ($masaz) {
             $form->setDefaults(array(
@@ -44,9 +45,10 @@ class MassagesForm extends BaseBT3Form {
                 'cena' => $masaz['cena'],
                 'id_masaze' => $masaz['id_masaze'],
             ));
+            $form->addSubmit('smaz', 'Smazat');
         }
 
-        $form->addSubmit('uloz', 'Uložit');
+
 
         return $form;
     }

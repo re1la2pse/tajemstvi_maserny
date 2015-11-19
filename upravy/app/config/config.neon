@@ -28,3 +28,4 @@ services:
 	- App\Model\GalerieModel
 	- App\Model\UserManager
 	- App\Model\MassagesModel
+	- App\Model\MyPurifier

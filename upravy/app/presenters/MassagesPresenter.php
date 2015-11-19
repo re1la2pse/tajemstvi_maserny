@@ -22,7 +22,7 @@ class MassagesPresenter extends BasePresenter {
      */
     public $massagesModel;
 
-    //Massaz
+//formulář pro masáže
     public function createComponentMassagesForm() {
 
         $masaz = NULL;
@@ -33,13 +33,21 @@ class MassagesPresenter extends BasePresenter {
 
         $form = (new Forms\MassagesForm())->create($this->massagesModel->getKategoriePole(), $masaz);
 
-        $form->onSuccess[] = array($this, 'massageFormSucceeded');
+        $form->onSuccess[] = array($this, 'massageZpracujForm');
 
         return $form;
     }
-
+//
+    public function massageZpracujForm(Nette\Forms\Form $form) {
+        if ($form['uloz']->isSubmittedBy()) {
+            MassagesPresenter::massageFormSucceeded($form);
+        }
+        else {
+            MassagesPresenter::massageFormDelete($form);
+        }
+    }
+//vloží nebo updatuje masáž
     public function massageFormSucceeded($form) {
-
         $values = $form->getValues();
 
         $this->massagesModel->insertMassage($values);
@@ -47,10 +55,18 @@ class MassagesPresenter extends BasePresenter {
         $this->flashMessage("Masáž uložena");
         $this->redirect('Massages:sprava');
     }
+//smaze masáž
+    public function massageFormDelete($form) {
+        $values = $form->getValues();
 
-    //Kategorie
+        $this->massagesModel->deleteMasaz($values);
+
+        $this->flashMessage("Masáž smazána");
+        $this->redirect('Massages:sprava');
+    }
+
+//formulář pro kategorie
     public function createComponentKategorieForm() {
-
         $kategorie = NULL;
 
         if ($id = $this->getParameter('kategorie')) {
@@ -58,20 +74,40 @@ class MassagesPresenter extends BasePresenter {
         }
         $form = (new Forms\KategorieForm())->create($kategorie);
 
-        $form->onSuccess[] = array($this, 'kategorieFormSucceeded');
+        $form->onSuccess[] = array($this, 'kategorieZpracujForm');
 
         return $form;
     }
 
-    public function kategorieFormSucceeded($form) {
+    public function kategorieZpracujForm(Nette\Forms\Form $form) {
+        if ($form['uloz']->isSubmittedBy()) {
+            MassagesPresenter::kategorieFormSucceeded($form);
+        }
+        else {
+            MassagesPresenter::kategorieFormDelete($form);
+        }
+    }
 
+//vlozi kategorii
+    public function kategorieFormSucceeded($form) {
         $values = $form->getValues();
 
         $this->massagesModel->insertKategorie($values);
-
+        Debugger::fireLog($form);
         $this->flashMessage("Kategorie uložena");
         $this->redirect('Massages:sprava');
     }
+//smaze kategorii
+    public function kategorieFormDelete($form) {
+        $values = $form->getValues();
+
+        $this->massagesModel->deleteKategorie($values);
+        Debugger::fireLog($form);
+        $this->flashMessage("Kategorie smazana");
+        $this->redirect('Massages:sprava');
+    }
+
+
 
 
 

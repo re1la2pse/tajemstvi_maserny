@@ -9,6 +9,7 @@
 namespace Forms;
 
 use Nette\Application\UI\Form;
+use App\Presenters\MassagesPresenter;
 
 class KategorieForm extends BaseBT3Form {
 
@@ -25,7 +26,10 @@ class KategorieForm extends BaseBT3Form {
         $form->addTextArea('popis', 'Popis')
             ->setRequired('Popis musí být vyplněn');
         $form->addHidden('id_kategorie', NULL);
-        $form->addSubmit('uloz', 'Uložit');
+        $form->addSubmit('uloz', 'Uložit');//->onClick[] = [$this, 'kategorieFormDelete'];
+
+        $form['popis']->getControlPrototype()->class('ckeditor');
+        $form->getElementPrototype()->onsubmit('CKEDITOR.instances["' . $form['popis']->getHtmlId() . '"].updateElement()');
 
         if ($kategorie) {
             $form->setDefaults(array(
@@ -33,6 +37,7 @@ class KategorieForm extends BaseBT3Form {
                'popis' => $kategorie['popis'],
                'id_kategorie' => $kategorie['id_kategorie'],
             ));
+            $form->addSubmit('smaz', 'Smazat');//->onClick[] = array($this, 'kategorieFormDelete');
         }
 
         return $form;

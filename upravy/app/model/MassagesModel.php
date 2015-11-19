@@ -9,28 +9,28 @@
 namespace App\Model;
 
 use Nette;
+use App\Model\MyPurifier;
 
 
 class MassagesModel extends Nette\Object {
     private $db;
+    private $purify;
 
     public function __construct(Nette\Database\Context $database)
     {
         $this->db = $database;
+        $this->purify = new MyPurifier();
     }
-    /**
-     * @param $pictures
-     */
 
 //nacte masaze z DB
     public function getMassages() {
         return $this->db->table('masaze');
     }
-
+//nacte kategorie z DB
     public function getKategorie() {
         return $this->db->table('kategorie_masazi');
     }
-
+//nacte masaz z DB dle ID
     public function getMassage($id) {
 
         $masaze = $this->db->table('masaze')
@@ -48,7 +48,7 @@ class MassagesModel extends Nette\Object {
 
         return $pom;
     }
-//jedna kategorie z DB dle $id
+//nacte kategorii z DB dle ID
     public function getKategorii($id) {
         $kategorie = $this->db->table('kategorie_masazi')
             ->where('id_kategorie', $id);
@@ -68,7 +68,7 @@ class MassagesModel extends Nette\Object {
                 ->where('id_kategorie', $kategorie);
     }
 
-    //pole[id => nazev, ]
+//nacte kategorie ve tvaru [id => nazev, ]
     public  function getKategoriePole() {
 
         $kategorie = $this->getKategorie();
@@ -82,7 +82,7 @@ class MassagesModel extends Nette\Object {
         return $kat;
     }
 
-    //pole[pole[kategorie => pole[masaz,..]],pole[],..]
+//nacte masaze ve tvaru [[kategorie => [masaz,..]],[],..]
     public function getMassagesArray() {
 
         $kategorie = $this->getKategorie();
@@ -103,7 +103,7 @@ class MassagesModel extends Nette\Object {
          return $masaze;
     }
 
-    //[idK =>[idM => M, idM => M],.. ]
+//nacte masaze ve tvaru [idK =>[idM => M, idM => M],.. ]
     public function getMassagesArray2() {
 
         $kategorie = $this->getKategorie();
@@ -124,7 +124,13 @@ class MassagesModel extends Nette\Object {
         return $masaze;
     }
 
+//vlozi nebo updatuje masaz
     public  function insertMassage($values) {
+
+        $values['nazev'] = $this->purify->purify($values['nazev']);
+        $values['popis'] = $this->purify->purify($values['popis']);
+        $values['cas'] = $this->purify->purify($values['cas']);
+        $values['cena'] = $this->purify->purify($values['cena']);
 
         if ($values['id_masaze']) {
             $this->db->table('masaze')
@@ -155,7 +161,11 @@ class MassagesModel extends Nette\Object {
 
     }
 
+//vlozi nebo updatuje kategorii
     public  function insertKategorie($values) {
+
+        $values['nazev'] = $this->purify->purify($values['nazev']);
+        $values['popis'] = $this->purify->purify($values['popis']);
 
         if ($values['id_kategorie']) {
             $this->db->table('kategorie_masazi')
@@ -178,5 +188,20 @@ class MassagesModel extends Nette\Object {
             ));
         }
 
+    }
+
+//smaze kategorii
+
+    public function deleteKategorie ($values) {
+        $this->db->table('kategorie_masazi')
+            ->where('id_kategorie', $values['id_kategorie'])
+            ->delete();
+    }
+
+//smaze masaz
+    public function deleteMasaz ($values) {
+        $this->db->table('masaze')
+            ->where('id_masaze', $values['id_masaze'])
+            ->delete();
     }
 }
