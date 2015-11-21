@@ -20,6 +20,8 @@ class MassagesForm extends BaseBT3Form {
 
         $form = $this->getBootstrapForm();
 
+        $cesta = '../../';
+
         $form->addText('nazev', 'Název')
             ->setRequired('Název musí být vyplněn');
         $form->addSelect('kategorie', 'Kategorie', $kategorie)
@@ -34,7 +36,7 @@ class MassagesForm extends BaseBT3Form {
             ->setRequired('Cena musí být vyplněna')
             ->addRule(Form::INTEGER, 'Cena musí být číslo');
         $form->addHidden('id_masaze', NULL);
-        $form->addSubmit('uloz', 'Uložit');
+        $form->addUpload('picture', 'Vyber fotku: ');
 
         $form['popis']->getControlPrototype()->class('ckeditor');
         $form->getElementPrototype()->onsubmit('CKEDITOR.instances["' . $form['popis']->getHtmlId() . '"].updateElement()');
@@ -48,8 +50,19 @@ class MassagesForm extends BaseBT3Form {
                 'cena' => $masaz['cena'],
                 'id_masaze' => $masaz['id_masaze'],
             ));
+
+            if ($masaz['obrazek'] != '') {
+                $form->addImage('pictureB', $cesta . $masaz['obrazek'])
+                    ->setDisabled(TRUE);
+            }
+        }
+
+        $form->addSubmit('uloz', 'Uložit');
+
+        if ($masaz) {
             $form->addSubmit('smaz', 'Smazat');
         }
+
 
 
 

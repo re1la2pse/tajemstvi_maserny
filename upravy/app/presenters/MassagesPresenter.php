@@ -102,7 +102,7 @@ class MassagesPresenter extends BasePresenter {
         $values = $form->getValues();
 
         $this->massagesModel->deleteKategorie($values);
-        Debugger::fireLog($form);
+        //Debugger::fireLog($form);
         $this->flashMessage("Kategorie smazana");
         $this->redirect('Massages:sprava');
     }

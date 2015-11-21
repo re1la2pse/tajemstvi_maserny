@@ -6,6 +6,7 @@ use Nette;
 use Forms;
 use App\Model\GalerieModel;
 use Nette\Utils\Image;
+use Tracy\Debugger;
 
 class FotogaleriePresenter extends BasePresenter
 {
@@ -51,10 +52,6 @@ class FotogaleriePresenter extends BasePresenter
 
         $this->galerieModel->changePictures($values);
 
-        //foreach ($values as $value) {
-        //    $this->flashMessage($value);
-        //}
-
         $this->flashMessage("Změny byly provedeny");
         $this->redirect('Fotogalerie:sprava');
     }
@@ -67,6 +64,6 @@ class FotogaleriePresenter extends BasePresenter
 
     public function renderSprava() {
         
-        $this->template->style = "sprava_fotogalerie_style"; 
+        $this->template->style = "sprava_fotogalerie_style";
     }
 }

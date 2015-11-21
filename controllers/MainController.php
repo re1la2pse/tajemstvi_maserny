@@ -10,6 +10,8 @@ class MainController {
 
     public static function dispatch($path) {
 
+        $kategorie = MassagesModel::getKategoriePN();
+
         $p = array_shift($path);
 
         switch ($p) {
@@ -24,7 +26,7 @@ class MainController {
             case "darkovyPoukaz":
                 self::voucher();
                 break;
-
+/*
             case "rekondicni":
             case "relaxacni":
             case "detoxikacni":
@@ -32,7 +34,7 @@ class MainController {
             case "specialni":
             self::massages();
             break;
-
+*/
             case "galerie":
                 self::galerie();
                 break;
@@ -46,13 +48,21 @@ class MainController {
                 break;
 
             default:
-                echo "Tato stránka neexituje";
+                if (in_array($p, $kategorie)) {
+                    self::massages();
+                }
+                else {
+                    echo "Tato stránka neexistuje";
+                }
         }
     }
 
     public static function frontPage() {
 
         $smarty = Utils::smartyInit();
+
+        $smarty->assign('kategoriePN', MassagesModel::getKategoriePN());
+        $smarty->assign('kategorie', MassagesModel::getKategorie());
 
         $smarty->assign('style', 'frontPage_style');
         $smarty->display('frontPage.html');
