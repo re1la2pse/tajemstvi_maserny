@@ -103,8 +103,8 @@ body {
 
 #fb-icon {
     position: absolute;
-    left: 100px;
-    bottom: 150px;
+    left: 50px;
+    top: 65px;
     width: 30px;
     height: 30px;
     background-image: url('../img/fb-icon.png');
@@ -114,12 +114,15 @@ body {
 
 .mapWrapper {
     width: 550px;
-    height: 200px;
+    height: 210px;
     /*border: 2px solid #fed136;
     border-radius: 10px;*/
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .googleMap {
     border: 3px solid #fed136;
     border-radius: 10px;
+    
 }

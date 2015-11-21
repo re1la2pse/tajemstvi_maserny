@@ -40,6 +40,10 @@ class MainController {
             case "oleje":
                 self::oils();
                 break;
+            
+            case "contactForm":
+                self::contactForm();
+                break;
 
             default:
                 echo "Tato stránka neexituje";
@@ -108,6 +112,29 @@ class MainController {
 
         $smarty->display('oils.html');
         exit;
+    }
+    
+    /**
+     * Odesila kontaktni formular
+     */
+    public static function contactForm() {
+        
+        $mail = new PHPMailer();
+        
+        //sanitize dat z formulare.
+        //kontrola mailu a tel. cisla na spravny tvar je v js, tady to nekontroluju
+        //nebo bych měl???
+        $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+        $phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
+        $message = filter_var($_POST['message'], FILTER_SANITIZE_STRING);
+        
+        
+        
+        //echo "Formulář byl üspěšně odeslán";
+        echo $name;
+        exit;
+        
     }
 
 

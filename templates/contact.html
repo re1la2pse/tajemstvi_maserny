@@ -4,28 +4,50 @@
 <div class="content">
 
     <section>
-        <div id="contactSection" class="container small-section">
+        <div id="contactSection" class="container section">
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-1 contactColumn">
                     <h3>Kontakt:</h3>
                     <a href="https://www.facebook.com/TajemstviMaserny"><div id="fb-icon"></div> </a>
 
                     <ul>
+                        <li><h4>Masáže:</h4></li>
                         <li><h4>Monika Páclová</h4></li>
-                        <li>tet.: 739 513 425</li>
-                        <li>e-mail: info@tajemstvimaserny.cz</li>
+                        <li>Objednávky na tel.: 739 513 425</li>
+                        <li>e-mail: paclova.monika@seznam.cz</li>
                         <li></li>
                         <li>adresa: 28.října 548/8, Ostrava</li>
-                        <li>v pracovní dny od 10 do 17 hod.</li>
+                        <li>pondělí - pátek: 9:00 - 20:00</li>
+                        <li>sobota + neděle: po předchozí dohodě</li>
+                    </ul>
+                    
+                    <ul>
+                        <li><h4>Kosmetika:</h4></li>
+                        <li><h4>Lenka Černíková</h4></li>
+                        <li>Objednávky na tel.: 739 357 510</li>
+                        <li>e-mail: tajemstvikosmetiky@seznam.cz</li>
+                        <li></li>
+                        <li>adresa: 28.října 548/8, Ostrava</li>
+                        <li>pondělí - pátek: 9:00 - 18:00</li>
                     </ul>
                 </div>
 
-                <div class="col-lg-6  voucherColumn" >
+                <div class="col-lg-6  voucherColumn center" >
                     <div class="mapWrapper">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.7631899629077!2d18.25623391361843!3d49.828115879749674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713e36ce241705d%3A0xefe384861a722c7e!2zMjguIMWZw61qbmEsIE9zdHJhdmE!5e0!3m2!1scs!2scz!4v1447174422027" width="550" height="200" frameborder="0" class="googleMap"  allowfullscreen></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2573.3512092921737!2d18.294440976319436!3d49.835858076091405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713e32e2390725b%3A0xf36341bd7a0851f8!2zMjguIMWZw61qbmEgNTQ4LzgsIDcwMiAwMCBPc3RyYXZhLU1vcmF2c2vDoSBPc3RyYXZhIGEgUMWZw612b3o!5e0!3m2!1scs!2scz!4v1448096138700" width="550" height="210" frameborder="0" class="googleMap" allowfullscreen></iframe> 
                     </div>
+                    
+                     <h4>Objednávky</h4>
+                        <p>V pracovní dny od 10:00 - 17:00<br />
+                        Pokud Vám nezvedáme telefon,
+                        s největší pravděpodobností právě pracujeme.</p>
+                        <p>Ozveme se Vám ihned, jak jen to bude možné.<br />
+                        Děkujeme za pochopení!</p>
                 </div>
             </div>
+            
+           
+            
         </div>
     </section>
 
@@ -34,7 +56,6 @@
         </div>
     </section>
 
-<!-- Contact Section -->
     <section>
         <div id="contact" class="container section">
             <div class="row">
@@ -45,25 +66,28 @@
             </div>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <form name="sentMessage" id="contactForm" novalidate>
+                    
+                    <div class="formErrors"></div>
+                    
+                    <form name="sentMessage" id="contactForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Vaše jméno *" id="name" required data-validation-required-message="Vložte jméno.">
+                                    <input type="text" class="form-control" placeholder="Vaše jméno *" name="name">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Váš email *" id="email" required data-validation-required-message="Vložte email.">
+                                    <input type="email" class="form-control" placeholder="Váš email *" name="email">
                                     <p class="help-block text-danger"></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="tel" class="form-control" placeholder="Váš telefon *" id="phone" required data-validation-required-message="Vložte tel. číslo.">
+                                    <input type="tel" class="form-control" placeholder="Váš telefon *" name="phone">
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Vaše zpráva *" id="message" required data-validation-required-message="Vložte zprávu."></textarea>
+                                    <textarea class="form-control" placeholder="Vaše zpráva *" name="message"></textarea>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
@@ -79,6 +103,20 @@
         </div>
     </section>
 
+    <section>
+        <div class="container sectionBetweenSection">
+        </div>
+    </section>
+    
+    <section>
+        <div id="contactSection" class="container small-section">
+            <div class="row center">
+                <h4>Zodpovědný vedoucí: Monika Páclová, IČ: 75293323</h4>
+                <p>Podrobné informace Vám poskytneme také na emailu: <strong>info@tajemstvimaserny.cz</strong></p>
+            </div>
+        </div>
+    </section>
+    
     <section>
         <div class="container sectionBetweenSection">
         </div>
