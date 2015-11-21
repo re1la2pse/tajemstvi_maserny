@@ -19,12 +19,13 @@ class ChangePictureForm extends BaseBT3Form {
     public function create($pictures = array()) {
         $form = $this->getBootstrapForm();
 
-        //$form->addSubmit('send1', 'Uložit změny');
+        //$cesta = '../../../';
+        $cesta = '../../';
+
 
         foreach ($pictures as $picture) {
-            //$form->addHidden($picture['id_fotky']);
-            $form->addImage('nic' . $picture['id_fotky'], '../../../' . $picture['miniatura'])
-                ->setDisabled(TRUE);
+                $form->addImage('nic' . $picture['id_fotky'], $cesta . $picture['miniatura'])
+                    ->setDisabled(TRUE);
 
             $form->addCheckbox('smazat'.$picture['id_fotky'], 'Smazat');
             $form->addCheckbox('zobrazit'.$picture['id_fotky'], 'Zobrazit');

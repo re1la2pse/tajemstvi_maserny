@@ -5,19 +5,20 @@
 
     <h2>Správa masáží</h2>
 
-    <ul>
-    {foreach $kategorie as $katId => $kat}
-        <li><a n:href="Massages:upravaK, 'kategorie' => $katId">{$kat}</a></li>
+    {if $kategorie != NULL}
         <ul>
-        {foreach $masaze[$katId] as $masazId => $masaz}
-            <li><a n:href="Massages:upravaM, 'masaz' => $masazId">{$masaz}</a></li>
+        {foreach $kategorie as $katId => $kat}
+            <li><a n:href="Massages:upravaK, 'kategorie' => $katId">{$kat}</a></li>
+            <ul>
+            {foreach $masaze[$katId] as $masazId => $masaz}
+                <li><a n:href="Massages:upravaM, 'masaz' => $masazId">{$masaz}</a></li>
+            {/foreach}
+            </ul>
         {/foreach}
         </ul>
-    {/foreach}
-    </ul>
+    {else}
+        Žádné masáže.
+    {/if}
 
-    <a n:href="Massages:upravaK">Nová kategorie</a>
-    <br>
-    <a n:href="Massages:upravaM">Nová masáž</a>
 
 </div>

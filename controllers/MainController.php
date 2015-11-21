@@ -42,7 +42,7 @@ class MainController {
                 break;
 
             default:
-                echo "Tato stránka neexituje";
+                echo "Tato stránka neexistuje";
         }
     }
 
