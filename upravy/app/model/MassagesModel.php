@@ -58,7 +58,7 @@ class MassagesModel extends Nette\Object {
         foreach ($kategorie as $kat) {
             $pom['nazev'] = $kat['nazev'];
             $pom['popis'] = $kat['popis'];
-            $pom['obrazek'] = $kat['obrazek'];
+            //$pom['obrazek'] = $kat['obrazek'];
             $pom['id_kategorie'] = $kat['id_kategorie'];
         }
 

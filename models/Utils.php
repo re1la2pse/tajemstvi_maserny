@@ -50,6 +50,8 @@ class Utils {
             } else {
                 self::$smarty->assign('ROOT', '');
             }
+
+           self::$smarty->assign('kategorieMenu', MassagesModel::getCategories());
         }
 
         return self::$smarty;

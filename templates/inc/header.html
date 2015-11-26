@@ -60,12 +60,10 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="">Masáže<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{$ROOT}/rekondicni-masaze">Rekondiční</a></li>
-                            <li><a href="{$ROOT}/relaxacni-masaze">Relaxační</a></li>
-                            <li><a href="{$ROOT}/pristrojove-masaze">Přístrojové</a></li>
-                            <li><a href="{$ROOT}/detoxikacni-masaze">Detoxikační</a></li>
-                            <li><a href="{$ROOT}/zdravotni-masaze">Zdravotní</a></li>
-                            <li><a href="{$ROOT}/specialni-pece">Speciální péče</a></li>
+
+                            {foreach from=$kategorieMenu item=kat}
+                                <li><a href="{$ROOT}/{$kat['idNazev']}">{$kat['nazev']}</a></li>
+                            {/foreach}
                         </ul>
                     </li>
                     <li><a href="{$ROOT}/oleje">Speciální oleje</a></li>

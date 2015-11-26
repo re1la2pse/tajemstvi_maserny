@@ -51,10 +51,10 @@ class MassagesForm extends BaseBT3Form {
                 'id_masaze' => $masaz['id_masaze'],
             ));
 
-            if ($masaz['obrazek'] != '') {
+           /* if ($masaz['obrazek'] != '') {
                 $form->addImage('pictureB', $cesta . $masaz['obrazek'])
                     ->setDisabled(TRUE);
-            }
+            }*/
         }
 
         $form->addSubmit('uloz', 'Uložit');

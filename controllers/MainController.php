@@ -61,9 +61,7 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
-        $smarty->assign('kategoriePN', MassagesModel::getKategoriePN());
-        $smarty->assign('kategorie', MassagesModel::getKategorie());
-
+        $smarty->assign('kategorie', MassagesModel::getCategories());
         $smarty->assign('style', 'frontPage_style');
         $smarty->display('frontPage.html');
         exit;
@@ -93,6 +91,7 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
+        $smarty->assign('kategorie', MassagesModel::getCategoriesWithMassages());
         $smarty->assign('js_script', 'massage');
         $smarty->assign('style', 'massages_style');
         $smarty->display('massages.html');

@@ -4,24 +4,6 @@
     <div class="row priceTable">
         <div class="col-lg-10 col-lg-offset-1">
             <hr />
-            <!--<table class="table-bordered">
-                <thead>
-                <tr>
-                    <td>30 min.</td>
-                    <td>60 min.</td>
-                    <td>90 min.</td>
-                    <td>120 min.</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>100 Kč.</td>
-                    <td>200 Kč.</td>
-                    <td>300 Kč.</td>
-                    <td>400 Kč.</td>
-                </tr>
-                </tbody>
-            </table>-->
             <div class="price">
                 <h3><span>60 minut:</span> 400Kč</h3>
             </div>
@@ -61,52 +43,47 @@
         <div class="row">
             <div id="left_menu" class="col-lg-3 left_column">
 
-                    <h4>Rekondiční masáže:</h4>
-                    <ul id="rekondicniMasazeMenu" class="no_list_style">
-                        <li id="rekondicni1" class="menu_item">Klasická masáž</li>
-                        <!--<li>Deep Tissue masáž</li>-->
-                        <li id="rekondicni2" class="menu_item">Baňková masáž</li>
-                        <li id="rekondicni3" class="menu_item">Dornova terapie + Breussova masáž</li>
-                        <li id="rekondicni4" class="menu_item">Reflexní terapie chodidel</li>
+                {foreach from=$kategorie item=kat}
+                    <h4>{$kat['nazev']}</h4>
+                    <ul id="{$kat['idNazev']}" class="no_list_style">
+                        {foreach from=$kat['masaze'] item=masaz name=mLoop}
+                            <li id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}" class="menu_item">{$masaz['nazev']}</li>
+                        {/foreach}
                     </ul>
-
-                    <h4>Relaxační masáže:</h4>
-                    <ul id="relaxacniMasazeMenu" class="no_list_style">
-                        <li id="relaxacni1" class="menu_item">Havajská masáž LOMI LOMI</li>
-                        <li id="relaxacni2" class="menu_item">Indická masáž Abhyanga</li>
-                        <li id="relaxacni3" class="menu_item">Indonéská Bali masáž</li>
-                        <li id="relaxacni4" class="menu_item">Masáž lávovými kameny</li>
-                        <li id="relaxacni5" class="menu_item">Thajská olejová masáž</li>
-                        <li id="relaxacni6" class="menu_item">Thajská masáž nohou</li>
-                        <li id="relaxacni7" class="menu_item">Australská masáž KODO</li>
-                    </ul>
-
-                    <h4>Přístrojové masáže:</h4>
-                    <ul id="pristrojoveMasazeMenu" class="no_list_style">
-                        <li id="pristrojove1" class="menu_item">Vacupress Niodé III</li>
-                        <li id="pristrojove2" class="menu_item">Lifting obličeje Vacupress Niodé III</li>
-                        <li id="pristrojove3" class="menu_item">Lymfatické kalhoty Pneuven</li>
-                    </ul>
-
-                    <h4>Detoxikační masáže:</h4>
-                    <ul id="detoxikacniMasazeMenu" class="no_list_style">
-                        <li id="detoxikacni1" class="menu_item">Medová masáž</li>
-                        <li id="detoxikacni2" class="menu_item">Čokoládová masáž</li>
-                        <li id="detoxikacni3" class="menu_item">Anticelulitidní masáž</li>
-                        <li id="detoxikacni4" class="menu_item">Lymfatická masáž</li>
-                    </ul>
-
-                    <h4>Speciální péče:</h4>
-                    <ul id="specialniMasazeMenu" class="no_list_style">
-                        <li id="specialni1" class="menu_item">Moxování</li>
-                        <li id="specialni2" class="menu_item">Tygrování</li>
-                        <li id="specialni3" class="menu_item">Lávové kameny</li>
-                        <li id="specialni4" class="menu_item">Tělové svítící TADÉ</li>
-                    </ul>
-
+                {/foreach}
             </div>
 
             <div class="col-lg-9 right_column">
+
+            {foreach from=$kategorie item=kat}
+                {foreach from=$kat['masaze'] item=masaz name=mLoop}
+                    <div id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}m" class="{$smarty.foreach.mLoop.index + 1}m massage">
+                        <div class="row">
+                            <div class="col-lg-3 col-lg-offset-1 col2">
+                                <img src="{$ROOT}/{$masaz['obrazek']}" class="img-circle obrazek" width="150px" height="150px">
+                            </div>
+                            <div class="col-lg-7 col1">
+                                <h3>{$masaz['nazev']}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <p>
+                                    {$masaz['popis']}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row priceTable">
+                            <div class="col-lg-10 col-lg-offset-1">
+                                <hr />
+                                <div class="price">
+                                    <h3><span>{$masaz['cas']} minut:</span>{$masaz['cena']}Kč</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {/foreach}
+            {/foreach}
 
                     <!---------- REKONDICNI MASAZE ---------->
 
@@ -248,7 +225,7 @@
                             </div>
                             {$smarty.capture.priceTable}
                         </div>
-                        
+
                         <div id="relaxacni2m" class="massage 2m">
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-1 col2">
@@ -273,7 +250,7 @@
                             </div>
                             {$smarty.capture.priceTable}
                         </div>
-                        
+
                         <div id="relaxacni3m" class="massage 3m">
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-1 col2">
@@ -298,7 +275,7 @@
                             </div>
                             {$smarty.capture.priceTable}
                         </div>
-                        
+
                         <div id="relaxacni4m" class="massage 4m">
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-1 col2">
@@ -322,7 +299,7 @@
                             </div>
                             {$smarty.capture.priceTable}
                         </div>
-                        
+
                         <div id="relaxacni5m" class="massage 5m">
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-1 col2">
@@ -345,7 +322,7 @@
                             </div>
                             {$smarty.capture.priceTable}
                         </div>
-                        
+
                         <div id="relaxacni6m" class="massage 6m">
                             <div class="row">
                                 <div class="col-lg-3 col-lg-offset-1 col2">
@@ -760,7 +737,7 @@
                         </div>
 
                     <!----------KONEC SPECIALNI PECE ---------->
-            
+
             </div> <!-- Right column-->
         </div>
     </div>

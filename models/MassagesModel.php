@@ -9,20 +9,32 @@
 class MassagesModel {
 
 
-    public static function getKategorie() {
+    /**
+     * Vraci jen ty kategorie, ktere maji alespon jednu masaz
+     * pridava idNazev ke kazde kategorii (nazev bez diakritiky a mezer)
+     * @return array
+     */
+    public static function getCategories() {
         $pdo = Db_Data::getPDO();
 
-        $sql = "SELECT * FROM kategorie_masazi";
+        $sql = "SELECT k.id_kategorie, k.* FROM kategorie_masazi k WHERE EXISTS (select * from masaze where id_kategorie = k.id_kategorie )";
 
         $q = $pdo->prepare($sql);
         $q->execute();
 
-        return $q->fetchAll();
+        $kategorie = $q->fetchAll();
+
+        foreach( $kategorie as $key => $kat) {
+            $kategorie[$key]['idNazev'] = self::title2pagename($kat['nazev']);
+            //echo $kat['nazev'] . "<br />"
+        }
+
+        return $kategorie;
     }
 
     public static function getKategoriePN() {
 
-        $kategorie = MassagesModel::getKategorie();
+        $kategorie = MassagesModel::getCategories();
 
         $kat = array();
         $i = 1;
@@ -65,9 +77,52 @@ class MassagesModel {
 
         $return = strtr($text, $znaky);
 
-        $return = Str_Replace(" ", "-", $return); //nahradí mezery a podtržítka pomlčkami
+        $return = Str_Replace(" ", "", $return); //smaze mezery
         $return = StrToLower($return); //velká písmena nahradí malými.
         return $return;
+    }
+
+    /**
+     * vrati kategorie s masazema ktere do nich patri
+     */
+    public static function getCategoriesWithMassages() {
+        $pdo = Db_Data::getPDO();
+
+        $kategorie = self::getCategories();
+
+        foreach($kategorie as $key =>$kat) {
+
+            //$kategorie[$key]['idNazev'] = self::title2pagename($kat['nazev']);
+
+            $kategorie[$key]['masaze'] = self::getMassagesByCategory($kat['id_kategorie']);
+
+            //echo $kat['nazev'] . "-" . $key . "-" . $kategorie[$key]['idNazev'] . "<br />";
+        }
+
+        //pro testovani
+        /*foreach($kategorie as $item) {
+            foreach($item['masaze'] as $mas) {
+                echo $item['nazev'] . "-" . $mas['nazev'] . "<br />";
+            }
+        }*/
+
+        return $kategorie;
+    }
+
+    /**
+     * Vrati vsechny masaze dane kategorie
+     * @param $categoryId - id kategorie
+     * @return mixed
+     */
+    public static function getMassagesByCategory($categoryId) {
+        $pdo = Db_Data::getPDO();
+
+        $sql = "SELECT * FROM masaze WHERE id_kategorie = :id";
+
+        $q = $pdo->prepare($sql);
+        $q->execute(array(":id" => $categoryId));
+
+        return $q->fetchall();
     }
 
 }

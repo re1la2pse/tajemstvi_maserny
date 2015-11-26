@@ -51,10 +51,10 @@ class KategorieForm extends BaseBT3Form {
                 'popis' => $kategorie['popis'],
                 'id_kategorie' => $kategorie['id_kategorie'],
             ));
-            if ($kategorie['obrazek'] != '') {
+           /* if ($kategorie['obrazek'] != '') {
                 $form->addImage('pictureB', $cesta . $kategorie['obrazek'])
                     ->setDisabled(TRUE);
-            }
+            }*/
         }
         $form->addSubmit('uloz', 'Uložit');
 

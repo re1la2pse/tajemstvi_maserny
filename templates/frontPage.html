@@ -87,16 +87,17 @@
                 </div>
             </div>
             <div class="row">
-                {foreach from=$kategorie item=prvek}
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
 
-                            <a href="{$ROOT}/{$kategoriePN[{$prvek['id_kategorie']}]}"><img src="{$prvek['obrazek']}" class="img-circle obrazek" width="200px" height="200px"></a>
-                            <a href="{$ROOT}/{$kategoriePN[{$prvek['id_kategorie']}]}"><h4>{$prvek['nazev']}</h4></a>
-                            {$prvek['popis']}
+                {foreach from=$kategorie item=kat}
+                <div class="col-md-4 col-sm-6">
+                    <div class="center">
 
-                        </div>
+                        <a href="{$ROOT}/{$kat['idNazev']}"><img src="{$kat['obrazek']}" class="img-circle obrazek" width="200px" height="200px"></a>
+                        <a href="{$ROOT}/{$kat['idNazev']}"><h4>{$kat['nazev']}</h4></a>
+                        {$kat['popis']}
+
                     </div>
+                </div>
                 {/foreach}
             </div><!--/.row-->
         </div><!--/.box-->
