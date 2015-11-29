@@ -256,6 +256,8 @@ class MassagesModel extends Nette\Object {
             ->where('id_kategorie', $values['id_kategorie'])
             ->delete();
     }
+    
+//smaze 
 
 //smaze masaz
     public function deleteMasaz ($values) {
