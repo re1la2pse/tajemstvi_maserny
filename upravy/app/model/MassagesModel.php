@@ -10,6 +10,7 @@ namespace App\Model;
 
 use Nette;
 use App\Model\MyPurifier;
+use Nette\Database\Table\Selection;
 
 
 class MassagesModel extends Nette\Object {
@@ -128,60 +129,88 @@ class MassagesModel extends Nette\Object {
 
 //vlozi nebo updatuje masaz
     public  function insertMassage($values) {
-
+        //osetri vstup
         $values['nazev'] = $this->purify->purify($values['nazev']);
         $values['popis'] = $this->purify->purify($values['popis']);
         $values['cas'] = $this->purify->purify($values['cas']);
         $values['cena'] = $this->purify->purify($values['cena']);
-
+        //update masaze
         if ($values['id_masaze']) {
-
+            //obrazek je
             if ($values['picture'] != '') {
-
+                //smaze puvodni obrazek, protoze se neprepise obrazek s jinou priponou
+                $masaz = $this->db->table('masaze')->get($values['id_masaze']);
+                $masaz = $masaz->toArray();
+                if ($masaz['obrazek'] != 'NULL')
+                    unlink('../../' . $masaz['obrazek']);
+                //
                 $fileName = $values['picture']->getSanitizedName();
                 $pripona = pathinfo($fileName, PATHINFO_EXTENSION);
                 $Picture = $values['picture']->toImage();
-                $Picture->save('../../media/img/kategorie/' . $values['id_kategorie'] . '.' . $pripona);
-                $this->db->table('kategorie_masazi')
-                    ->where('id_kategorie', $values['id_kategorie'])
+                $Picture->save('../../media/img/masaze/' . $values['id_masaze'] . '.' . $pripona);
+                //vlozeni do DB
+                $this->db->table('masaze')
+                    ->where('id_masaze', $values['id_masaze'])
                     ->update(array(
-                        'obrazek' => "media/img/kategorie/" . $values['id_kategorie'] . '.' . $pripona,
+                        'nazev' => $values['nazev'],
+                        'popis' => $values['popis'],
+                        'cas' => $values['cas'],
+                        'cena' => $values['cena'],
+                        'id_kategorie' => $values['kategorie'],
+                        'obrazek' => "media/img/masaze/" . $values['id_masaze'] . '.' . $pripona,
                     ));
             }
-
-            $this->db->table('masaze')
-                ->where('id_masaze', $values['id_masaze'])
-                ->update(array(
-                    'nazev' => $values['nazev'],
-                    'popis' => $values['popis'],
-                    'cas' => $values['cas'],
-                    'cena' => $values['cena'],
-                    'id_kategorie' => $values['kategorie']
-                ));
+            else {
+                //vlozeni do DB
+                $this->db->table('masaze')
+                    ->where('id_masaze', $values['id_masaze'])
+                    ->update(array(
+                        'nazev' => $values['nazev'],
+                        'popis' => $values['popis'],
+                        'cas' => $values['cas'],
+                        'cena' => $values['cena'],
+                        'id_kategorie' => $values['kategorie'],
+                    ));
+            }
         }
+        //nova masaz
         else {
+            //ID do DB
             if ($number = $this->db->table('masaze')->max('id_masaze'))
                 $number += 1;
             else
                 $number = 1;
 
-            $pripona = "";
             if ($values['picture'] != '') {
+                //je obrazek
                 $fileName = $values['picture']->getSanitizedName();
                 $pripona = pathinfo($fileName, PATHINFO_EXTENSION);
                 $Picture = $values['picture']->toImage();
                 $Picture->save('../../media/img/masaze/' . $number . '.' . $pripona);
+                //vlozeni do DB
+                $this->db->table('masaze')->insert(array(
+                    'id_masaze' => $number,
+                    'nazev' => $values['nazev'],
+                    'popis' => $values['popis'],
+                    'cas' => $values['cas'],
+                    'cena' => $values['cena'],
+                    'obrazek' => "media/img/masaze/" . $number . '.' . $pripona,
+                    'id_kategorie' => $values['kategorie'],
+                ));
             }
-
-            $this->db->table('masaze')->insert(array(
-                'id_masaze' => $number,
-                'nazev' => $values['nazev'],
-                'popis' => $values['popis'],
-                'cas' => $values['cas'],
-                'cena' => $values['cena'],
-                'obrazek' => "media/img/masaze/" . $number . '.' . $pripona,
-                'id_kategorie' => $values['kategorie'],
-            ));
+            else {
+                //neni obrazek
+                //vlozeni do DB
+                $this->db->table('masaze')->insert(array(
+                    'id_masaze' => $number,
+                    'nazev' => $values['nazev'],
+                    'popis' => $values['popis'],
+                    'cas' => $values['cas'],
+                    'cena' => $values['cena'],
+                    'obrazek' => 'NULL',
+                    'id_kategorie' => $values['kategorie'],
+                ));
+            }
         }
 
     }
@@ -192,12 +221,20 @@ class MassagesModel extends Nette\Object {
      */
     public  function insertKategorie($values) {
 
+        //osetri vstup
         $values['nazev'] = $this->purify->purify($values['nazev']);
         $values['popis'] = $this->purify->purify($values['popis']);
 
+        //aktualizace kategorie
         if ($values['id_kategorie']) {
+            //aktualizuje i obrazek
             if ($values['picture'] != '') {
-
+                //smaze puvodni obrazek, protoze se neprepise obrazek s jinou priponou
+                $kategorie = $this->db->table('kategorie_masazi')->get($values['id_kategorie']);
+                $kategorie = $kategorie->toArray();
+                if ($kategorie['obrazek'] != 'NULL')
+                    unlink('../../' . $kategorie['obrazek']);
+                //
                 $fileName = $values['picture']->getSanitizedName();
                 $pripona = pathinfo($fileName, PATHINFO_EXTENSION);
                 $Picture = $values['picture']->toImage();
@@ -205,53 +242,69 @@ class MassagesModel extends Nette\Object {
                 $this->db->table('kategorie_masazi')
                     ->where('id_kategorie', $values['id_kategorie'])
                     ->update(array(
+                        'nazev' => $values['nazev'],
+                        'popis' => $values['popis'],
                         'obrazek' => "media/img/kategorie/" . $values['id_kategorie'] . '.' . $pripona,
                     ));
             }
-
-            $this->db->table('kategorie_masazi')
-                ->where('id_kategorie', $values['id_kategorie'])
-                ->update(array(
-                    'nazev' => $values['nazev'],
-                    'popis' => $values['popis'],
-                ));
+            //aktualizace bez obrazku
+            else {
+                $this->db->table('kategorie_masazi')
+                    ->where('id_kategorie', $values['id_kategorie'])
+                    ->update(array(
+                        'nazev' => $values['nazev'],
+                        'popis' => $values['popis'],
+                    ));
+            }
 
         }
         else {
+            //ID v db
             if ($number = $this->db->table('kategorie_masazi')->max('id_kategorie'))
                 $number += 1;
             else
                 $number = 1;
-
-            $pripona = "";
+            //je obrazek
             if ($values['picture'] != '') {
                 $fileName = $values['picture']->getSanitizedName();
                 $pripona = pathinfo($fileName, PATHINFO_EXTENSION);
                 $Picture = $values['picture']->toImage();
                 $Picture->save('../../media/img/kategorie/' . $number . '.' . $pripona);
-            }
 
-            $this->db->table('kategorie_masazi')->insert(array(
-                'id_kategorie' => $number,
-                'nazev' => $values['nazev'],
-                'popis' => $values['popis'],
-                'obrazek' => "media/img/kategorie/" . $number . '.' . $pripona,
-            ));
+                $this->db->table('kategorie_masazi')->insert(array(
+                    'id_kategorie' => $number,
+                    'nazev' => $values['nazev'],
+                    'popis' => $values['popis'],
+                    'obrazek' => "media/img/kategorie/" . $number . '.' . $pripona,
+                ));
+            }
+            //neni obrazek
+            else {
+                $this->db->table('kategorie_masazi')->insert(array(
+                    'id_kategorie' => $number,
+                    'nazev' => $values['nazev'],
+                    'popis' => $values['popis'],
+                    'obrazek' => 'NULL',
+                ));
+            }
         }
 
     }
 
 //smaze kategorii
-
     public function deleteKategorie ($values) {
+        $kategorie = $this->db->table('kategorie_masazi')->get($values['id_kategorie']);
+        $kategorie = $kategorie->toArray();
 
-        $kategorie = $this->db->table('kategorie_masazi')->where('id_kategorie', $values['id_kategorie']);
+        $masaze = $this->db->table('masaze')->where('id_kategorie', $values['id_kategorie'])->select('id_masaze');
 
-        foreach ($kategorie as $kat) {
-            $cestaImg = $kat['obrazek'];
+        foreach ($masaze as $idMasaze => $hodnotyMasaze) {
+            $this->deleteMasazID($idMasaze);
         }
 
-        unlink('../../' . $cestaImg);
+        if ($kategorie['obrazek'] != 'NULL') {
+            unlink('../../' . $kategorie['obrazek']);
+        }
         $this->db->table('kategorie_masazi')
             ->where('id_kategorie', $values['id_kategorie'])
             ->delete();
@@ -259,16 +312,26 @@ class MassagesModel extends Nette\Object {
 
 //smaze masaz
     public function deleteMasaz ($values) {
+        $masaz = $this->db->table('masaze')->get($values['id_masaze']);
+        $masaz = $masaz->toArray();
 
-        $kategorie = $this->db->table('masaze')->where('id_masaze', $values['id_masaze']);
-
-        foreach ($kategorie as $kat) {
-            $cestaImg = $kat['obrazek'];
+        if ($masaz['obrazek'] != 'NULL') {
+            unlink('../../' . $masaz['obrazek']);
         }
-
-        unlink('../../' . $cestaImg);
         $this->db->table('masaze')
             ->where('id_masaze', $values['id_masaze'])
+            ->delete();
+    }
+
+    public function deleteMasazID($id) {
+        $masaz = $this->db->table('masaze')->get($id);
+        $masaz = $masaz->toArray();
+
+        if ($masaz['obrazek'] != 'NULL') {
+            unlink('../../' . $masaz['obrazek']);
+        }
+        $this->db->table('masaze')
+            ->where('id_masaze', $id)
             ->delete();
     }
 }
