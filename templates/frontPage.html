@@ -88,7 +88,14 @@
             </div>
             <div class="row">
 
-                {foreach from=$kategorie item=kat}
+
+
+                {foreach from=$kategorie item=kat name=ms}
+                    {if $smarty.foreach.ms.index % 3 == 0 }
+                        </div><!-- /row -->
+                        <div class="row">
+                    {/if}
+
                 <div class="col-md-4 col-sm-6">
                     <div class="center">
 
