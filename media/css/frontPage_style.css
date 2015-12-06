@@ -2,7 +2,7 @@
 
 /* Slider */
 .carousel {
-    height: 90%;
+    height: 80%;
 }
 
 .item,
@@ -118,7 +118,7 @@
     }
     
     .carousel {
-        height: 90%;
+        height: 85%;
         position: relative;
         z-index: 0;
     }
@@ -126,7 +126,7 @@
 
 @media screen and (max-height:768px) {
     .carousel {
-        height: 100%;
+        height: 85%;
         position: relative;
         z-index: 0;
     }
