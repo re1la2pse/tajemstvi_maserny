@@ -18,19 +18,21 @@
 
     <div class="container section">
         <div class="row">
-            <div id="left_menu" class="col-lg-3 left_column">
+            <div id="left_menu" class="col-xs-3 col-sm-3 col-md-3 col-lg-3 left_column">
 
                 {foreach from=$kategorie item=kat}
-                    <h4>{$kat['nazev']}</h4>
-                    <ul id="{$kat['idNazev']}" class="no_list_style">
-                        {foreach from=$kat['masaze'] item=masaz name=mLoop}
-                            <li id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}" class="menu_item">{$masaz['nazev']}</li>
-                        {/foreach}
-                    </ul>
+                    <div class="menuKategorieWrapper">
+                        <h4>{$kat['nazev']}</h4>
+                        <ul id="{$kat['idNazev']}" class="no_list_style">
+                            {foreach from=$kat['masaze'] item=masaz name=mLoop}
+                                <li id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}" class="menu_item">{$masaz['nazev']}</li>
+                            {/foreach}
+                        </ul>
+                    </div>
                 {/foreach}
             </div>
 
-            <div class="col-lg-9 right_column">
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9 right_column">
 
             {foreach from=$kategorie item=kat}
                 {foreach from=$kat['masaze'] item=masaz name=mLoop}

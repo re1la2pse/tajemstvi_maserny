@@ -107,7 +107,21 @@
     }
 }
 
-@media(max-width:768px) {
+@media(max-width:991px) {
+    #fb-icon {
+        position: absolute;
+        left: 100px;
+        bottom: 170px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
+    }
+}
+
+
+@media(max-width:767px) {
     #logo {
         font-size: 23pt;
     }
@@ -121,6 +135,17 @@
         height: 85%;
         position: relative;
         z-index: 0;
+    }
+
+    #fb-icon {
+        position: absolute;
+        left: 100px;
+        bottom: 120px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
     }
 }
 
