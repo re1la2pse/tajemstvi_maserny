@@ -9,6 +9,15 @@
 .active,
 .carousel-inner {
     height: 100%;
+
+
+}
+
+#myCarousel {
+    border-bottom: 5px solid #fec503;
+    border-top: 5px solid #fec503;
+    box-shadow: 0 0 80px 40px black;
+    -moz-box-shadow: 0 0 80px 40px black;
 }
 
 /* Fotky na pozadi jsou nastaveny v indexu pomoci inline CSS*/
