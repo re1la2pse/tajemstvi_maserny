@@ -65,7 +65,7 @@ class MassagesModel extends Nette\Object {
 
         return $pom;
     }
-
+//vrati masaze dane kategorie
     public function getMassagesK($kategorie) {
             return $this->db->table('masaze')
                 ->where('id_kategorie', $kategorie);

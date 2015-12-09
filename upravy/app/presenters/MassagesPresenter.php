@@ -11,7 +11,6 @@ namespace App\Presenters;
 use Nette;
 use Forms;
 use App\Model\MassagesModel;
-use Nette\Utils\Arrays;
 use Tracy\Debugger;
 
 class MassagesPresenter extends BasePresenter {
@@ -93,7 +92,6 @@ class MassagesPresenter extends BasePresenter {
         $values = $form->getValues();
 
         $this->massagesModel->insertKategorie($values);
-        Debugger::fireLog($form);
         $this->flashMessage("Kategorie uložena");
         $this->redirect('Massages:sprava');
     }

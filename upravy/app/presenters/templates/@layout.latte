@@ -28,6 +28,7 @@
         <div>
           <ul class="nav navbar-nav">
             <!--<li><a n:href="Homepage:">Úvodní strana</a></li>-->
+            <!-- Fotogalerie -->
 	    <li class="dropdown">
 	      <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Fotogalerie<span class="caret"></span></a>
 	      <ul class="dropdown-menu">
@@ -35,7 +36,7 @@
 		    <li><a n:href="Fotogalerie:addPhoto">Přidat fotku</a></li>
 	      </ul>
 	    </li>
-
+            <!-- Masaze -->
 	    <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Masáže<span class="caret"></span></a>
         	    <ul class="dropdown-menu">
@@ -44,7 +45,17 @@
         		    <li><a n:href="Massages:upravaM">Přidat masáž</a></li>
         	    </ul>
         </li>
+            <!-- Oleje -->
+	    <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Oleje<span class="caret"></span></a>
+        	    <ul class="dropdown-menu">
+        	        <li><a n:href="Oils:sprava">Správa olejů</a></li>
+        		    <li><a n:href="Oils:upravaK">Přidat kategorii</a></li>
+        		    <li><a n:href="Oils:upravaO">Přidat olej</a></li>
+        	    </ul>
+        </li>
 
+            <!-- Uvodni strana -->
 
 	    {if $user->loggedIn}
 		 <li><a n:href="Sign:out">Odhlásit se</a></li>

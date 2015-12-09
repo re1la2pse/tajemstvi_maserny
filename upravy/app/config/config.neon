@@ -29,3 +29,4 @@ services:
 	- App\Model\UserManager
 	- App\Model\MassagesModel
 	- App\Model\MyPurifier
+	- App\Model\OilsModel

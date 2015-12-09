@@ -1,0 +1,24 @@
+{block content}
+
+<div class="container content">
+
+    <h2>Správa olejů</h2>
+    <p>Prázdné kategorie nejsou zobrazeny na webu. </p>
+
+    {if $kategorie != NULL}
+        <ul>
+        {foreach $kategorie as $katId => $kat}
+            <li><a n:href="Oils:upravaK, 'kategorie' => $katId">{$kat}</a></li>
+            <ul>
+            {foreach $oils[$katId] as $oilId => $oil}
+                <li><a n:href="Oils:upravaO, 'oil' => $oilId">{$oilz}</a></li>
+            {/foreach}
+            </ul>
+        {/foreach}
+        </ul>
+    {else}
+        Žádné oleje.
+    {/if}
+
+
+</div>
