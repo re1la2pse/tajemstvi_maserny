@@ -119,6 +119,11 @@ body {
     border-radius: 10px;*/
     margin-top: 20px;
     margin-bottom: 30px;
+    margin: 0 auto;
+}
+
+.contactColumn {
+    margin-left: 50px;
 }
 
 .googleMap {
@@ -143,3 +148,32 @@ body {
     border-radius: 5px;
     background-color: #adebad;
 }
+
+@media(max-width:991px) {
+    .mapWrapper {
+        margin: 10px auto;
+    }
+
+    .contactColumn {
+        margin-left: 50px;
+    }
+}
+
+@media(max-width:767px) {
+
+    #fb-icon {
+        position: absolute;
+        left: 50px;
+        top: 40px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
+    }
+
+    .contactColumn {
+        margin-left: 0px;
+    }
+}
+

@@ -55,20 +55,21 @@
             </div>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{$ROOT}/">Domů</a></li>
-                    <li><a href="{$ROOT}/galerie">Fotogalerie</a></li>
-                    <li class="dropdown">
+                    <li {if isset($active_unas)}class="active"{/if}><a href="{$ROOT}/">U nás</a></li>
+                    <li {if isset($active_akce)}class="active"{/if}><a href="{$ROOT}/akce">Akce</a></li>
+                    <li {if isset($active_galerie)}class="active"{/if}><a href="{$ROOT}/galerie">Fotogalerie</a></li>
+                    <li {if isset($active_masaze)}class="dropdown active"{else}class="dropdown"{/if}>
                         <a class="dropdown-toggle" href="">Masáže<b class="caret"></b></a>
                         <ul class="dropdown-menu">
 
                             {foreach from=$kategorieMenu item=kat}
                                 <li><a href="{$ROOT}/{$kat['idNazev']}">{$kat['nazev']}</a></li>
                             {/foreach}
+                            <li><a href="{$ROOT}/paroveMasaze">Párové masáže</a></li>
                         </ul>
                     </li>
-                    <li><a href="{$ROOT}/oleje">Speciální oleje</a></li>
-                    <li><a href="#about-us">Link</a></li>
-                    <li><a href="{$ROOT}/kontakt">Kontakt</a></li>
+                    <li {if isset($active_oleje)}class="active"{/if}><a href="{$ROOT}/oleje">Speciální oleje</a></li>
+                    <li {if isset($active_kontakt)}class="active"{/if}><a href="{$ROOT}/kontakt">Kontakt</a></li>
                 </ul>
             </div>
         </div>

@@ -43,6 +43,15 @@ class MainController {
                 self::oils();
                 break;
             
+            case "paroveMasaze":
+                self::pairMassage();
+                break;
+            
+            case "akce":
+                self::actions();
+                break;
+            
+            //odesilani kontaktniho formulare
             case "contactForm":
                 self::contactForm();
                 break;
@@ -62,6 +71,7 @@ class MainController {
         $smarty = Utils::smartyInit();
 
         $smarty->assign('kategorie', MassagesModel::getCategories());
+        $smarty->assign('active_unas', true);
         $smarty->assign('style', 'frontPage_style');
         $smarty->display('frontPage.html');
         exit;
@@ -72,6 +82,7 @@ class MainController {
 
         $smarty = Utils::smartyInit();
         
+        $smarty->assign('active_kontakt', true);
         $smarty->assign('style', 'contact_style');
         $smarty->display('contact.html');
         exit;
@@ -81,6 +92,7 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
+        $smarty->assign('active_poukaz', true);
         $smarty->assign('js_script', 'voucher');
         $smarty->assign('style', 'voucher_style');
         $smarty->display('voucher.html');
@@ -91,6 +103,7 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
+        $smarty->assign('active_masaze', true);
         $smarty->assign('kategorie', MassagesModel::getCategoriesWithMassages());
         $smarty->assign('js_script', 'massage');
         $smarty->assign('style', 'massages_style');
@@ -105,6 +118,7 @@ class MainController {
         //$smarty->assign('js_script', 'galerie');
         $smarty->assign('style', 'galerie_style');
         
+        $smarty->assign('active_galerie', true);
         $smarty->assign('galerie', true);
         $smarty->assign('photos', GalerieModel::getGalerie());
 
@@ -116,10 +130,31 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
+        $smarty->assign('active_oleje', true);
         //$smarty->assign('js_script', 'galerie');
         $smarty->assign('style', 'oils_style');
 
         $smarty->display('oils.html');
+        exit;
+    }
+    
+    public static function  pairMassage() {
+        
+        $smarty = Utils::smartyInit();
+        
+        $smarty->assign('active_masaze', true);
+        $smarty->assign('style', 'pairMassage_style');
+        $smarty->display('paroveMasaze.html');
+        exit;
+    }
+    
+    public static function actions() {
+        
+        $smarty = Utils::smartyInit();
+        
+        $smarty->assign('active_akce', true);
+        $smarty->assign('style', 'actions_style');
+        $smarty->display('akce.html');
         exit;
     }
     

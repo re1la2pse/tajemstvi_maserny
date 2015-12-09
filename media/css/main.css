@@ -265,6 +265,11 @@ body {
     .content {
         margin-top: 180px;
     }
+
+    .navbar-default .navbar-brand {
+       display: none;
+    }
+
 }
 
 /* DROP-DOWN*/
