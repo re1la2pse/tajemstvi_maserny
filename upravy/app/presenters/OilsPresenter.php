@@ -19,8 +19,8 @@ class OilsPresenter extends BasePresenter {
      * @var OilsModel
      */
     public $oilsModel;
-/*
-    //formulář pro masáže
+
+    //formulář pro oleje
     public function createComponentOilsForm() {
 
         $oil = NULL;
@@ -35,6 +35,7 @@ class OilsPresenter extends BasePresenter {
 
         return $form;
     }
+
 //zpracuje tlacitko formulare
     public function oilZpracujForm(Nette\Forms\Form $form) {
         if ($form['uloz']->isSubmittedBy()) {
@@ -50,19 +51,19 @@ class OilsPresenter extends BasePresenter {
 
         $this->oilsModel->insertOil($values);
 
-        $this->flashMessage("Olej uložena");
+        $this->flashMessage("Olej uložen");
         $this->redirect('Oils:sprava');
     }
 //smaze masáž
     public function oilFormDelete($form) {
         $values = $form->getValues();
 
-        $this->oilsModel->deleteMasaz($values);
+        $this->oilsModel->deleteOil($values);
 
-        $this->flashMessage("Olej smazána");
+        $this->flashMessage("Olej smazán");
         $this->redirect('Oils:sprava');
     }
-*/
+
 //formulář pro kategorie
     public function createComponentKategorieOForm() {
         $kategorie = NULL;

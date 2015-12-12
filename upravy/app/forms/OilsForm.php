@@ -6,10 +6,9 @@
  * Time: 16:47
  */
 
-namespace App\Forms;
+namespace Forms;
 
-
-use Forms\BaseBT3Form;
+use Nette\Application\UI\Form;
 
 class OilsForm extends BaseBT3Form {
 
@@ -41,7 +40,7 @@ class OilsForm extends BaseBT3Form {
                 'nazev' => $oil['nazev'],
                 'kategorie' => $oil['id_kategorie'],
                 'popis' => $oil['popis'],
-                'cas' => $oil['cas'],
+                'cena' => $oil['cena'],
                 'id_oleje' => $oil['id_oleje'],
             ));
 
@@ -52,9 +51,6 @@ class OilsForm extends BaseBT3Form {
         if ($oil) {
             $form->addSubmit('smaz', 'Smazat');
         }
-
-
-
 
         return $form;
     }

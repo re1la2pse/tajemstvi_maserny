@@ -309,8 +309,6 @@ class MassagesModel extends Nette\Object {
             ->where('id_kategorie', $values['id_kategorie'])
             ->delete();
     }
-    
-//smaze 
 
 //smaze masaz
     public function deleteMasaz ($values) {
@@ -324,7 +322,7 @@ class MassagesModel extends Nette\Object {
             ->where('id_masaze', $values['id_masaze'])
             ->delete();
     }
-
+//smaze masaz podle ID
     public function deleteMasazID($id) {
         $masaz = $this->db->table('masaze')->get($id);
         $masaz = $masaz->toArray();

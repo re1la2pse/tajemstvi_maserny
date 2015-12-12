@@ -131,8 +131,8 @@ class MainController {
         $smarty = Utils::smartyInit();
 
         $smarty->assign('active_oleje', true);
-        //$smarty->assign('js_script', 'galerie');
         $smarty->assign('style', 'oils_style');
+        $smarty->assign('kategorie', OilsModel::getCategoriesWithOils());
 
         $smarty->display('oils.html');
         exit;

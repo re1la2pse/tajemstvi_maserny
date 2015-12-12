@@ -121,4 +121,56 @@ class OilsModel {
             ->delete();
     }
 
+    //vlozi nebo updatuje olej
+    public  function insertOil($values) {
+        //osetri vstup
+        $values['nazev'] = $this->purify->purify($values['nazev']);
+        $values['popis'] = $this->purify->purify($values['popis']);
+        $values['cena'] = $this->purify->purify($values['cena']);
+        //update masaze
+        if ($values['id_oleje']) {
+
+            //vlozeni do DB
+            $this->db->table('oleje')
+                    ->where('id_oleje', $values['id_oleje'])
+                    ->update(array(
+                        'nazev' => $values['nazev'],
+                        'popis' => $values['popis'],
+                        'cena' => $values['cena'],
+                        'id_kategorie' => $values['kategorie'],
+                    ));
+
+        }
+        //nova masaz
+        else {
+            //ID do DB
+            if ($number = $this->db->table('oleje')->max('id_oleje'))
+                $number += 1;
+            else
+                $number = 1;
+
+            //vlozeni do DB
+            $this->db->table('oleje')->insert(array(
+                    'id_oleje' => $number,
+                    'nazev' => $values['nazev'],
+                    'popis' => $values['popis'],
+                    'cena' => $values['cena'],
+                    'id_kategorie' => $values['kategorie'],
+                ));
+            }
+
+    }
+//smaze masaz
+    public function deleteOil ($values) {
+        $this->db->table('oleje')
+            ->where('id_oleje', $values['id_oleje'])
+            ->delete();
+    }
+//nacte olej z DB dle ID
+    public function getOil($id) {
+        $oil = $this->db->table('oleje')
+            ->get($id);
+        return $oil->toArray();
+    }
+
 }
