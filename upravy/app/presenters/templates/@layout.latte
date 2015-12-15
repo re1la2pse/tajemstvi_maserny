@@ -27,7 +27,22 @@
         </div>
         <div>
           <ul class="nav navbar-nav">
-            <!--<li><a n:href="Homepage:">Úvodní strana</a></li>-->
+            <!-- Intro -->
+	    <li class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Úvodní strana<span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+	        <li><a n:href="Intro:sprava">Správa</a></li>
+		    <li><a n:href="Intro:upravaF">Přidat fotku</a></li>
+	      </ul>
+	    </li>
+            <!-- Akce -->
+	    <li class="dropdown">
+	      <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Akce<span class="caret"></span></a>
+	      <ul class="dropdown-menu">
+	        <li><a n:href="Akce:sprava">Správa</a></li>
+		    <li><a n:href="Akce:uprava">Nová akce</a></li>
+	      </ul>
+	    </li>
             <!-- Fotogalerie -->
 	    <li class="dropdown">
 	      <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Fotogalerie<span class="caret"></span></a>

@@ -19,9 +19,7 @@ class ChangePictureForm extends BaseBT3Form {
     public function create($pictures = array()) {
         $form = $this->getBootstrapForm();
 
-        //$cesta = '../../../';
         $cesta = '../../';
-
 
         foreach ($pictures as $picture) {
                 $form->addImage('nic' . $picture['id_fotky'], $cesta . $picture['miniatura'])

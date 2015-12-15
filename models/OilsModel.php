@@ -9,7 +9,7 @@
 class OilsModel {
 
     /**
-     * vrati kategorie s masazema ktere do nich patri
+     * vrati kategorie s olejama, ktere do nich patri
      */
     public static function getCategoriesWithOils() {
 
@@ -44,7 +44,7 @@ class OilsModel {
     }
 
     /**
-     * Vrati vsechny masaze dane kategorie
+     * Vrati vsechny oleje dane kategorie
      * @param $categoryId - id kategorie
      * @return mixed
      */

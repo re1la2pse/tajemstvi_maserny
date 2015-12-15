@@ -12,36 +12,19 @@
 
     <!-- Wrapper for Slides -->
     <div class="carousel-inner">
-        <div class="item active">
-            <div class="fill" style="background-image:url('media/img/slider/slider1.jpg');"></div>
-            <div class="carousel-caption">
-                <h2></h2>
+        {foreach from=$photoses item=photo name=foo}
+            {if $smarty.foreach.foo.first}
+                <div class="item active">
+            {else}
+                <div class="item">
+            {/if}
+                {$phot = $photo['plna']}
+                <div class="fill" style='background-image:url("{$phot}");'></div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
             </div>
-        </div>
-        <div class="item">
-            <div class="fill" style="background-image:url('media/img/slider/slider2.jpg');"></div>
-            <div class="carousel-caption">
-                <h2></h2>
-            </div>
-        </div>
-        <div class="item">
-            <div class="fill" style="background-image:url('media/img/slider/slider3.jpg');"></div>
-            <div class="carousel-caption">
-                <h2></h2>
-            </div>
-        </div>
-        <div class="item">
-            <div class="fill" style="background-image:url('media/img/slider/slider4.jpg');"></div>
-            <div class="carousel-caption">
-                <h2></h2>
-            </div>
-        </div>
-        <div class="item">
-            <div class="fill" style="background-image:url('media/img/slider/slider5.jpg');"></div>
-            <div class="carousel-caption">
-                <h2></h2>
-            </div>
-        </div>
+        {/foreach}
     </div>
 </div>
 

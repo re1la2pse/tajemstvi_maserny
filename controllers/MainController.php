@@ -73,6 +73,7 @@ class MainController {
         $smarty->assign('kategorie', MassagesModel::getCategories());
         $smarty->assign('active_unas', true);
         $smarty->assign('style', 'frontPage_style');
+        $smarty->assign('photoses', IntroModel::getIntro());
         $smarty->display('frontPage.html');
         exit;
         
@@ -154,6 +155,7 @@ class MainController {
         
         $smarty->assign('active_akce', true);
         $smarty->assign('style', 'actions_style');
+        $smarty->assign('akce', AkceModel::getAkce());
         $smarty->display('akce.html');
         exit;
     }
