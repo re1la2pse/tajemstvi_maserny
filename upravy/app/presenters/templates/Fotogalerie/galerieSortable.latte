@@ -1,0 +1,61 @@
+{block content}
+
+<div class="container content">
+
+    <h2>Správa fotek</h2>
+
+    <p>
+        Skrytí/zobrazení fotek a mazání.
+    </p>
+
+    {form changeForm}
+
+    <ul class="errors" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $error">{$error}</li>
+    </ul>
+            
+            
+        <ul id="sortableGalerie">
+            <li idNumber="0">
+            <table>
+            <!-- 4 itemy na jeden radek -->
+            {foreach $form->controls as $name => $field}
+            
+                {if $name == "send"}
+                    </table>
+                    </li>
+                    </ul>
+                    <div class=clear></div>
+                    <div id="btnPanel">
+                        {input $name class => "btn btn-primary"}
+                    </div>
+                    {breakIf $name == "send"}
+                {else}
+                
+                    {if (($iterator->getCounter() - 1)  % 3) == 0}
+                        {if !$iterator->isFirst()}
+                            </table>    
+                            </li>
+                            <li idNumber="{($iterator->getcounter() - 1) / 3}">
+                            <table>
+                         {/if}   
+                    {/if}
+                    
+                    <tr>
+                        <td>{input $name}</td>
+                    </tr>
+                    
+                {/if}  
+                
+            {/foreach}   
+            
+    {/form}
+    
+
+</div>
+
+
+
+
+
+

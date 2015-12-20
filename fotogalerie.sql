@@ -40,11 +40,12 @@ CREATE TABLE IF NOT EXISTS `akce` (
 --
 
 CREATE TABLE IF NOT EXISTS `fotky` (
-  `id_fotky` int(11) NOT NULL,
+`id_fotky` int(11) NOT NULL,
   `miniatura` varchar(80) COLLATE utf8_czech_ci DEFAULT NULL,
   `plna` varchar(80) COLLATE utf8_czech_ci DEFAULT NULL,
-  `zobrazit` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci;
+  `zobrazit` int(11) NOT NULL,
+  `razeni` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_czech_ci AUTO_INCREMENT=8 ;
 
 --
 -- Vypisuji data pro tabulku `fotky`

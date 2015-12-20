@@ -7,7 +7,7 @@ class GalerieModel {
 
         $pdo = Db_Data::getPDO();
 
-        $sql = "SELECT * FROM fotky WHERE zobrazit = 1";
+        $sql = "SELECT * FROM fotky WHERE zobrazit = 1 ORDER BY razeni";
 
         $q = $pdo->prepare($sql);
         $q->execute();

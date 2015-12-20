@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Nette;
-
+use Tracy\Debugger;
 class GalerieModel extends Nette\Object
 {
     private $db;
@@ -53,7 +53,7 @@ class GalerieModel extends Nette\Object
     //nacte fotky z DB
     public function getGalerie() {
         return $this->db->table('fotky')
-            ->order('id_fotky');
+            ->order('razeni');
     }
 
     /**
@@ -80,6 +80,40 @@ class GalerieModel extends Nette\Object
                 }
             }
         }
+    }
+    
+    /**
+     * changeOrder
+     * funkce pozmeni serazeni fotek
+     * vyuziva jQuery sortable
+     */
+    public function changeOrder($newOrdering) {
+        
+        $newOrdering = explode(",", $newOrdering);
+        Debugger::fireLog($newOrdering);
+        
+        $fotky = $this->db->query('SELECT id_fotky FROM fotky ORDER BY razeni')->fetchAll();
+        
+        $fotkyId = array();
+        foreach($fotky as $fotka) {
+            $fotkyId[] = $fotka->id_fotky;       
+        }
+        Debugger::fireLog($fotkyId);
+        
+        for($i=0; $i < count($newOrdering); $i++) {
+            $this->db->query("UPDATE fotky SET razeni=? WHERE id_fotky=?", $i, $fotkyId[(int)$newOrdering[$i]]);
+        }
+        
+        $fotky = $this->db->query('SELECT id_fotky FROM fotky ORDER BY razeni')->fetchAll();
+        
+        $fotkyId = array();
+        foreach($fotky as $fotka) {
+            $fotkyId[] = $fotka->id_fotky;       
+        }
+        
+        Debugger::fireLog($fotkyId);
+        
+        
     }
 
 

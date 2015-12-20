@@ -7,10 +7,11 @@ use Forms;
 use App\Model\GalerieModel;
 use Nette\Utils\Image;
 use Tracy\Debugger;
+use Tracy;
 
 class FotogaleriePresenter extends BasePresenter
 {
-
+    
     /**
      * @inject
      * @var GalerieModel
@@ -53,7 +54,7 @@ class FotogaleriePresenter extends BasePresenter
         $this->galerieModel->changePictures($values);
 
         $this->flashMessage("Změny byly provedeny");
-        $this->redirect('Fotogalerie:sprava');
+        $this->redirect('Fotogalerie:galerieSortable');
     }
 
     /**
@@ -65,5 +66,27 @@ class FotogaleriePresenter extends BasePresenter
     public function renderSprava() {
         
         $this->template->style = "sprava_fotogalerie_style";
+    }
+    
+    /**
+     * Testovani razeni galerie
+     * handler odchytava ajaxove volani
+     */
+    public function handleChangeOrder($list) {
+        
+        $this->galerieModel->changeOrder($list);
+        
+        //$this->flashMessage("Řazení uloženo");
+        //$this->redirect('Fotogalerie:sortable');
+    }
+    
+    /**
+     *testovani razeni fotek v galerii
+     */
+    public function renderGalerieSortable() {
+        
+        $this->template->script = "galerieSortable";
+        $this->template->style = "galerieSortable_style";
+        
     }
 }

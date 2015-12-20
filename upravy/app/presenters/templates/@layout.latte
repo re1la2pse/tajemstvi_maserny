@@ -10,6 +10,7 @@
 
 	<link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
 	<link rel="stylesheet" href="{$basePath}/css/bootstrap-theme.min.css">
+	  <link rel="stylesheet" href="{$basePath}/css/jquery-ui.min.css">
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
   
 	<link rel="stylesheet" href="{$basePath}/css/{if isset($style)}{$style}{/if}.css">
@@ -47,8 +48,9 @@
 	    <li class="dropdown">
 	      <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Fotogalerie<span class="caret"></span></a>
 	      <ul class="dropdown-menu">
-	        <li><a n:href="Fotogalerie:sprava">Správa fotogalerie</a></li>
-		    <li><a n:href="Fotogalerie:addPhoto">Přidat fotku</a></li>
+	        <!--<li><a n:href="Fotogalerie:sprava">Správa fotogalerie</a></li>-->
+		<li><a n:href="Fotogalerie:addPhoto">Přidat fotku</a></li>
+		<li><a n:href="Fotogalerie:galerieSortable">Správa fotogalerie</a></li>
 	      </ul>
 	    </li>
             <!-- Masaze -->
@@ -89,10 +91,17 @@
 	{include content}
 
 	{block scripts}
-	    <script type="text/javascript" src="{$basePath}/js/jquery-1.9.1.min.js">
+	    <script type="text/javascript" src="{$basePath}/js/jquery-1.9.1.min.js"></script>
+	    <script type="text/javascript" src="{$basePath}/js/jquery-ui.min.js"></script>
 	    <script src="//nette.github.io/resources/js/netteForms.min.js"></script>
 	    <script type="text/javascript" src="{$basePath}/js/bootstrap.min.js"></script>
 	    <script type="text/javascript" src="{$basePath}/js/ckeditor/ckeditor.js"></script>
+	    <script type="text/javascript" src="{$basePath}/js/nette.ajax.js"></script>
+	    
+	    <script type="text/javascript" src="{$basePath}/js/{if isset($script)}{$script}{/if}.js"></script>
+	    
+	    
+	    
 	{/block}
 </body>
 </html>
