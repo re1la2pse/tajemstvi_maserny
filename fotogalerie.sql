@@ -1,22 +1,4 @@
-﻿-- phpMyAdmin SQL Dump
--- version 4.4.14
--- http://www.phpmyadmin.net
---
--- Počítač: 127.0.0.1
--- Vytvořeno: Úte 15. pro 2015, 21:10
--- Verze serveru: 5.6.26
--- Verze PHP: 5.6.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
+﻿--
 -- Databáze: `fotogalerie`
 --
 

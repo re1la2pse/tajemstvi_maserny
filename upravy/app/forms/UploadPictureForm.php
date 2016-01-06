@@ -28,6 +28,8 @@ class UploadPictureForm extends BaseBT3Form
 
         $form->addSubmit('send', 'Nahrát');
 
+        $form->getElementPrototype()->onsubmit('style = cursor:wait');
+
         return $form;
 
     }
