@@ -56,6 +56,10 @@ class MainController {
                 self::contactForm();
                 break;
 
+            case "voucherForm":
+                self::voucherForm();
+                break;
+
             default:
                 if (in_array($p, $kategorie)) {
                     self::massages();
@@ -178,13 +182,16 @@ class MainController {
 
         $mail->From = $email;
         $mail->FromName = $name;
-        $mail->AddAddress("mokrusa.p@gmail.com");
+        $mail->AddAddress("petr.mokrusa@centrum.cz");
 
         $mail->IsHTML(true);
         $mail->Subject = "Tajemství masérny - kontaktní formulář";
-        $mail->Body = "<p>" . $message . "</p><p>tel.: " . $phone . "</p>";
+        $mail->Body = "<h3>Zpráva z kontaktního formuláře:</h3>
+                       <p>" . $message . "</p>
+                       <p>" . $name . "</p>
+                       <p>tel.: " . $phone . "</p>";
 
-        $mail->AltBody =  $message . "/n tel.: " . $phone;
+        $mail->AltBody =  $message . "\n" . $name . "\n tel.: " . $phone;
         
         if ($mail->send()) {
             echo "ok";
@@ -192,7 +199,74 @@ class MainController {
             echo "error: " . $mail->ErrorInfo;
         }
         exit;
-        
+    }
+
+    /**
+     * Odesila formular pro objednani darkovych poukazu
+     */
+
+    public static function voucherForm() {
+
+        $mail = new PHPMailer();
+        $mail->CharSet = 'UTF-8';
+
+        $jmeno = filter_var($_POST['jmeno'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+        $text = filter_var($_POST['text'], FILTER_SANITIZE_STRING);
+        $hodnota = filter_var($_POST['hodnota'], FILTER_SANITIZE_STRING);
+        $doruceni = filter_var($_POST['doruceni'], FILTER_SANITIZE_STRING);
+        $ulice = filter_var($_POST['ulice'], FILTER_SANITIZE_STRING);
+        $mesto = filter_var($_POST['mesto'], FILTER_SANITIZE_STRING);
+        $psc = filter_var($_POST['psc'], FILTER_SANITIZE_STRING);
+
+        if ($doruceni == "0")
+            $zpusobDoruceni = "osobní vyzvednutí";
+        else {
+            $zpusobDoruceni = "zaslat poštou";
+        }
+
+        $mail->From = $email;
+        $mail->FromName = $jmeno;
+        $mail->AddAddress("petr.mokrusa@centrum.cz");
+
+        $mail->IsHTML(true);
+        $mail->Subject = "Tajemství masérny - objednávka poukazu";
+        $mail->Body = "
+                        <h3>Objednávka dárkového poukazu</h3>
+                        <ul>
+                            <li>Jméno: " . $jmeno ." </li>
+                            <li>Text na poukaz: " . $text ." </li>
+                            <li>Hodnota poukazu: " . $hodnota ." </li>
+                            <li>Způsob doručení: " . $zpusobDoruceni ." </li>
+                            <li>Ulice: " . $ulice ." </li>
+                            <li>Město: " . $mesto ." </li>
+                            <li>PSČ: " . $psc ." </li>
+                        </ul>
+
+                        <h4>Kontakt:</h4>
+                        <p>". $jmeno . "</p>
+                        <p>". $email . "</p>
+                    ";
+
+        $mail->AltBody = " Objednávka dárkového poukazu
+                           Jméno: " . $jmeno . "\n
+                           Text na poukaz: " . $text . "\n
+                           Hodnota poukazu: " . $hodnota . "\n
+                           Způsob doručení: " . $zpusobDoruceni . "\n
+                           Ulice: " . $ulice . "\n
+                           Město: " . $mesto . "\n
+                           PSČ: " . $psc . "\n\n
+
+                           Jméno: " . $jmeno . "\n
+                           Email: " . $email . "\n
+                         ";
+
+        if ($mail->send()) {
+            echo "ok";
+        } else {
+            echo "error: " . $mail->ErrorInfo;
+        }
+        exit;
     }
 
 

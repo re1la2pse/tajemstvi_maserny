@@ -6,3 +6,25 @@
     background-image: url(../img/poukaz.png);
     margin-top: 25px;
 }
+
+.formErrors p {
+    border: 2px solid red;
+    color: red;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #ff9999;
+}
+
+.formSuccess p {
+    border: 2px solid green;
+    color: green;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #adebad;
+}
+
+#righColumn {
+    margin-top: 75px;
+}

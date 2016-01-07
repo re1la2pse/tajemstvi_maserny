@@ -8,7 +8,21 @@
 
                 <h3>Dárkové poukazy</h3>
 
+                <div class="formErrors"></div>
+                <div class="formSuccess"></div>
+
                 <form id="voucherForm">
+
+                    <div class="form-group">
+                        <label for="fName">Jméno:</label>
+                        <input id="fName" type="text" name="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fEmail">email:</label>
+                        <input id="fEmail" type="text" name="email" class="form-control">
+                    </div>
+
                     <div class="form-group">
                         <label for="fText">Vlastní text:</label>
                         <input id="fText" type="text" name="customText" class="form-control">
@@ -16,18 +30,18 @@
 
                     <div class="form-group">
                         <label for="fworth">Hodnota:</label>
-                        <select id="fworth" class="form-control">
+                        <select id="fworth" name="valueOfVoucher" class="form-control">
                             <option value="500">500</option>
                             <option value="800">800</option>
                             <option value="1000">1000</option>
-                            <option value="pairMassage">Párová masáž</option>
-                            <option value="permanent">Permanentka</option>
+                            <option value="Párová masáž">Párová masáž</option>
+                            <option value="Permanentka">Permanentka</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label for="fdelivery">Způsob doručení:</label>
-                        <select id="fdelivery" class="form-control">
+                        <select id="fdelivery" name="delivery" class="form-control">
                             <option selected="selected" value="0">Osobní vyzvednutí</option>
                             <option value="1">Zaslat poštou</option>
                         </select>
