@@ -36,7 +36,7 @@ class FotogaleriePresenter extends BasePresenter
 
         // nejake presmerovani, asi na seznam fotek, nebo tak neco
         $this->flashMessage("Fotky byly úspěšně nahrány.");
-        $this->redirect('Fotogalerie:sprava');
+        $this->redirect('Fotogalerie:galerieSortable');
     }
 
     public function createComponentChangeForm() {

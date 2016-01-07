@@ -1,0 +1,28 @@
+{block content}
+
+
+<div class="container content">
+
+    <h2>Správa masáží</h2>
+    <p>Prázdné kategorie nejsou zobrazeny na webu. </p>
+
+    {if $kategorie != NULL}
+        {var $i=0}
+        <ul id="sortable">
+        {foreach $kategorie as $katId => $kat}
+            <li idNumber="{$i++}" class="kategorie"><a n:href="Massages:upravaK, 'kategorie' => $katId">{$kat}</a>
+            <ul>
+            {var $j=0}
+            {foreach $masaze[$katId] as $masazId => $masaz}
+                <li><a n:href="Massages:upravaM, 'masaz' => $masazId">{$masaz}</a></li>
+            {/foreach}
+            </ul>
+            </li>
+        {/foreach}
+        </ul>
+    {else}
+        Žádné masáže.
+    {/if}
+
+
+</div>

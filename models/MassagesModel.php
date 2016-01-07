@@ -17,7 +17,7 @@ class MassagesModel {
     public static function getCategories() {
         $pdo = Db_Data::getPDO();
 
-        $sql = "SELECT k.id_kategorie, k.* FROM kategorie_masazi k WHERE EXISTS (select * from masaze where id_kategorie = k.id_kategorie )";
+        $sql = "SELECT k.id_kategorie, k.* FROM kategorie_masazi k WHERE EXISTS (select * from masaze where id_kategorie = k.id_kategorie order by razeni)";
 
         $q = $pdo->prepare($sql);
         $q->execute();
@@ -117,7 +117,7 @@ class MassagesModel {
     public static function getMassagesByCategory($categoryId) {
         $pdo = Db_Data::getPDO();
 
-        $sql = "SELECT * FROM masaze WHERE id_kategorie = :id";
+        $sql = "SELECT * FROM masaze WHERE id_kategorie = :id order by razeni";
 
         $q = $pdo->prepare($sql);
         $q->execute(array(":id" => $categoryId));

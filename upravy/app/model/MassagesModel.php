@@ -11,6 +11,7 @@ namespace App\Model;
 use Nette;
 use App\Model\MyPurifier;
 use Nette\Database\Table\Selection;
+use Tracy\Debugger;
 
 
 class MassagesModel extends Nette\Object {
@@ -25,11 +26,13 @@ class MassagesModel extends Nette\Object {
 
 //nacte masaze z DB
     public function getMassages() {
-        return $this->db->table('masaze');
+        return $this->db->table('masaze')
+            ->order('razeni');
     }
 //nacte kategorie z DB
     public function getKategorie() {
-        return $this->db->table('kategorie_masazi');
+        return $this->db->table('kategorie_masazi')
+            ->order('razeni');
     }
 //nacte masaz z DB dle ID
     public function getMassage($id) {
@@ -68,7 +71,8 @@ class MassagesModel extends Nette\Object {
 //vrati masaze dane kategorie
     public function getMassagesK($kategorie) {
             return $this->db->table('masaze')
-                ->where('id_kategorie', $kategorie);
+                ->where('id_kategorie', $kategorie)
+                ->order('razeni');
     }
 
 //nacte kategorie ve tvaru [id => nazev, ]
@@ -181,6 +185,12 @@ class MassagesModel extends Nette\Object {
             else
                 $number = 1;
 
+            //poradi
+            if ($razeni = $this->db->table('masaze')->where('kategorie', $values['kategorie'])->max('razeni'))
+                $razeni += 1;
+            else
+                $razeni = 1;
+
             if ($values['picture'] != '') {
                 //je obrazek
                 $fileName = $values['picture']->getSanitizedName();
@@ -196,6 +206,7 @@ class MassagesModel extends Nette\Object {
                     'cena' => $values['cena'],
                     'obrazek' => "media/img/masaze/" . $number . '.' . $pripona,
                     'id_kategorie' => $values['kategorie'],
+                    'razeni' => $razeni,
                 ));
             }
             else {
@@ -209,6 +220,7 @@ class MassagesModel extends Nette\Object {
                     'cena' => $values['cena'],
                     'obrazek' => 'NULL',
                     'id_kategorie' => $values['kategorie'],
+                    'razeni' => $razeni,
                 ));
             }
         }
@@ -264,6 +276,11 @@ class MassagesModel extends Nette\Object {
                 $number += 1;
             else
                 $number = 1;
+            //poradi
+            if ($razeni = $this->db->table('masaze')->where('kategorie', $values['kategorie'])->max('razeni'))
+                $razeni += 1;
+            else
+                $razeni = 1;
             //je obrazek
             if ($values['picture'] != '') {
                 $fileName = $values['picture']->getSanitizedName();
@@ -276,6 +293,7 @@ class MassagesModel extends Nette\Object {
                     'nazev' => $values['nazev'],
                     'popis' => $values['popis'],
                     'obrazek' => "media/img/kategorie/" . $number . '.' . $pripona,
+                    'razeni' => $razeni,
                 ));
             }
             //neni obrazek
@@ -285,6 +303,7 @@ class MassagesModel extends Nette\Object {
                     'nazev' => $values['nazev'],
                     'popis' => $values['popis'],
                     'obrazek' => 'NULL',
+                    'razeni' => $razeni,
                 ));
             }
         }
@@ -333,5 +352,48 @@ class MassagesModel extends Nette\Object {
         $this->db->table('masaze')
             ->where('id_masaze', $id)
             ->delete();
+    }
+
+    /**
+     * changeOrder
+     * funkce pozmeni serazeni masazi dane kategorie
+     * vyuziva jQuery sortable
+     */
+    public function changeOrderMasaze($kat, $newOrdering) {
+
+        $newOrdering = explode(",", $newOrdering);
+
+        $masaze = $this->db->query('SELECT id_masaze WHERE kategorie=? FROM fotky ORDER BY razeni', $kat)->fetchAll();
+
+        $masazeId = array();
+        foreach($masaze as $masaz) {
+            $masazeId[] = $masaz->id_masaze;
+        }
+
+        for($i=0; $i < count($newOrdering); $i++) {
+            $this->db->query("UPDATE masaze SET razeni=? WHERE id_masaze=?", $i, $masazeId[(int)$newOrdering[$i]]);
+        }
+
+    }
+    /**
+     * changeOrder
+     * funkce pozmeni serazeni kategorii masazi
+     * vyuziva jQuery sortable
+     */
+    public function changeOrder($newOrdering) {
+
+        $newOrdering = explode(",", $newOrdering);
+
+        $kategorie = $this->db->query('SELECT id_kategorie FROM kategorie_masazi ORDER BY razeni')->fetchAll();
+
+        $kategorieId = array();
+        foreach($kategorie as $kat) {
+            $kategorieId[] = $kat->id_kategorie;
+        }
+
+        for($i=0; $i < count($newOrdering); $i++) {
+            $this->db->query("UPDATE kategorie_masazi SET razeni=? WHERE id_kategorie=?", $i, $kategorieId[(int)$newOrdering[$i]]);
+        }
+
     }
 }

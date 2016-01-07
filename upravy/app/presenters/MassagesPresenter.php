@@ -12,6 +12,7 @@ use Nette;
 use Forms;
 use App\Model\MassagesModel;
 use Tracy\Debugger;
+use Tracy;
 
 class MassagesPresenter extends BasePresenter {
 
@@ -104,9 +105,15 @@ class MassagesPresenter extends BasePresenter {
         $this->flashMessage("Kategorie smazana");
         $this->redirect('Massages:sprava');
     }
+    /**
+     * Testovani razeni galerie
+     * handler odchytava ajaxove volani
+     */
+    public function handleChangeOrder($list) {
 
+        $this->massagesModel->changeOrder($list);
 
-
+    }
 
 
     public function  renderUpravaK() {
@@ -120,6 +127,12 @@ class MassagesPresenter extends BasePresenter {
     public function renderSprava() {
         $this->template->kategorie = $this->massagesModel->getKategoriePole();
         $this->template->masaze = $this->massagesModel->getMassagesArray2();
+    }
+
+    public function renderSpravaSortable() {
+        $this->template->kategorie = $this->massagesModel->getKategoriePole();
+        $this->template->masaze = $this->massagesModel->getMassagesArray2();
+        $this->template->script = "massagesSortable";
     }
 
 }

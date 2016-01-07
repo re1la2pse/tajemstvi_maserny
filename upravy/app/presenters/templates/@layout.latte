@@ -49,15 +49,15 @@
 	      <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Fotogalerie<span class="caret"></span></a>
 	      <ul class="dropdown-menu">
 	        <!--<li><a n:href="Fotogalerie:sprava">Správa fotogalerie</a></li>-->
-		<li><a n:href="Fotogalerie:addPhoto">Přidat fotku</a></li>
-		<li><a n:href="Fotogalerie:galerieSortable">Správa fotogalerie</a></li>
+	        <li><a n:href="Fotogalerie:galerieSortable">Správa fotogalerie</a></li>
+		    <li><a n:href="Fotogalerie:addPhoto">Přidat fotku</a></li>
 	      </ul>
 	    </li>
             <!-- Masaze -->
 	    <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="" n:if="$user->loggedIn">Masáže<span class="caret"></span></a>
         	    <ul class="dropdown-menu">
-        	        <li><a n:href="Massages:sprava">Správa masáží</a></li>
+        	        <li><a n:href="Massages:spravaSortable">Správa masáží</a></li>
         		    <li><a n:href="Massages:upravaK">Přidat kategorii masáží</a></li>
         		    <li><a n:href="Massages:upravaM">Přidat masáž</a></li>
         	    </ul>
