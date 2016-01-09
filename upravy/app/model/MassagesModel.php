@@ -186,7 +186,7 @@ class MassagesModel extends Nette\Object {
                 $number = 1;
 
             //poradi
-            if ($razeni = $this->db->table('masaze')->where('kategorie', $values['kategorie'])->max('razeni'))
+            if ($razeni = $this->db->table('masaze')->where('id_kategorie', $values['kategorie'])->max('razeni'))
                 $razeni += 1;
             else
                 $razeni = 1;
@@ -277,7 +277,7 @@ class MassagesModel extends Nette\Object {
             else
                 $number = 1;
             //poradi
-            if ($razeni = $this->db->table('masaze')->where('kategorie', $values['kategorie'])->max('razeni'))
+            if ($razeni = $this->db->table('kategorie_masazi')->max('razeni'))
                 $razeni += 1;
             else
                 $razeni = 1;

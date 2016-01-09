@@ -53,7 +53,7 @@ class MassagesPresenter extends BasePresenter {
         $this->massagesModel->insertMassage($values);
 
         $this->flashMessage("Masáž uložena");
-        $this->redirect('Massages:sprava');
+        $this->redirect('Massages:spravaSortable');
     }
 //smaze masáž
     public function massageFormDelete($form) {
@@ -62,7 +62,7 @@ class MassagesPresenter extends BasePresenter {
         $this->massagesModel->deleteMasaz($values);
 
         $this->flashMessage("Masáž smazána");
-        $this->redirect('Massages:sprava');
+        $this->redirect('Massages:spravaSortable');
     }
 
 //formulář pro kategorie
@@ -94,7 +94,7 @@ class MassagesPresenter extends BasePresenter {
 
         $this->massagesModel->insertKategorie($values);
         $this->flashMessage("Kategorie uložena");
-        $this->redirect('Massages:sprava');
+        $this->redirect('Massages:spravaSortable');
     }
 //smaze kategorii
     public function kategorieFormDelete($form) {
@@ -103,7 +103,7 @@ class MassagesPresenter extends BasePresenter {
         $this->massagesModel->deleteKategorie($values);
         //Debugger::fireLog($form);
         $this->flashMessage("Kategorie smazana");
-        $this->redirect('Massages:sprava');
+        $this->redirect('Massages:spravaSortable');
     }
     /**
      * Testovani razeni galerie
