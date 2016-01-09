@@ -8,15 +8,16 @@
 
     {if $kategorie != NULL}
         {var $i=0}
+        {var $j=0}
         <ul id="sortable">
         {foreach $kategorie as $katId => $kat}
-            <li idNumber="{$i++}" class="kategorie"><a n:href="Massages:upravaK, 'kategorie' => $katId">{$kat}</a>
-            <ul>
-            {var $j=0}
-            {foreach $masaze[$katId] as $masazId => $masaz}
-                <li><a n:href="Massages:upravaM, 'masaz' => $masazId">{$masaz}</a></li>
-            {/foreach}
-            </ul>
+            <li idNumber="{$i}" class="kategorie"><a n:href="Massages:upravaK, 'kategorie' => $katId">{$kat}</a>
+                <ul>
+                    {foreach $masaze[$katId] as $masazId => $masaz}
+                        <li idNumber="{$j++}" class="masaz"><a n:href="Massages:upravaM, 'masaz' => $masazId">{$masaz}</a></li>
+                    {/foreach}
+                </ul>
+                {var $i+=1}
             </li>
         {/foreach}
         </ul>

@@ -12,6 +12,7 @@ use Nette;
 use App\Model\MyPurifier;
 use Nette\Database\Table\Selection;
 use Tracy\Debugger;
+use Tracy;
 
 
 class MassagesModel extends Nette\Object {
@@ -355,24 +356,59 @@ class MassagesModel extends Nette\Object {
     }
 
     /**
+     * @param $id
+     * vrati serazene ID masazi kategorie $id
+     */
+    public function vratMasaze($id) {
+        $masazeDB = $this->db->table('masaze')->where('kategorie', $id)->select('id_masaze')->order('razeni');
+        $masaze = array();
+
+        foreach ($masazeDB as $masazDB) {
+            $masaze[] = $masazDB['id_masaze'];
+        }
+
+        return $masaze;
+    }
+
+    /**
+     * @return array
+     * vrati serazene masaze
+     */
+    public function seznamMasazi() {
+
+        $sql = "SELECT k.id_kategorie FROM kategorie_masazi k WHERE EXISTS (select * from masaze where id_kategorie = k.id_kategorie) order by razeni";
+        $kategorieDB = $this->db->query($sql)->fetchAll();
+        $seznam = array();
+
+        foreach ($kategorieDB as $katDB) {
+            $seznam += $this->vratMasaze($katDB['id_kategorie']);
+        }
+
+        return $seznam;
+    }
+
+    /**
      * changeOrder
      * funkce pozmeni serazeni masazi dane kategorie
      * vyuziva jQuery sortable
      */
-    public function changeOrderMasaze($kat, $newOrdering) {
+    public function changeOrderMasaze($newOrdering) {
 
         $newOrdering = explode(",", $newOrdering);
 
-        $masaze = $this->db->query('SELECT id_masaze WHERE kategorie=? FROM fotky ORDER BY razeni', $kat)->fetchAll();
-
-        $masazeId = array();
-        foreach($masaze as $masaz) {
-            $masazeId[] = $masaz->id_masaze;
-        }
+        $masazeId = $this->seznamMasazi();
 
         for($i=0; $i < count($newOrdering); $i++) {
             $this->db->query("UPDATE masaze SET razeni=? WHERE id_masaze=?", $i, $masazeId[(int)$newOrdering[$i]]);
         }
+
+        $this->db->table('masaze')->insert(array(
+            'id_kategorie' => '55',
+            'nazev' => 'frwefgerw',
+            'popis' => 'fewfewf',
+            'obrazek' => 'NULL',
+            'razeni' => '55',
+        ));
 
     }
     /**

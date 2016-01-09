@@ -115,6 +115,12 @@ class MassagesPresenter extends BasePresenter {
 
     }
 
+    public function handleChangeOrderMasaze($list) {
+
+        $this->massagesModel->changeOrderMasaze($list);
+
+    }
+
 
     public function  renderUpravaK() {
 
