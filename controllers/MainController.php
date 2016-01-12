@@ -65,9 +65,16 @@ class MainController {
                     self::massages();
                 }
                 else {
-                    echo "Tato stránka neexistuje";
+                   self::errorPage();
                 }
         }
+    }
+
+    public static function errorPage() {
+        $smarty = Utils::smartyInit();
+        $smarty->assign('page',$_SERVER['REQUEST_URI'] );
+        $smarty->assign('active_unas', true);
+        $smarty->display('errorPage.html');
     }
 
     public static function frontPage() {
