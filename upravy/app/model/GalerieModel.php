@@ -44,7 +44,8 @@ class GalerieModel extends Nette\Object
                 'id_fotky' => $number,
                 'miniatura' => "media/img/fotogalerie/nahledy/" . $number . '.' . $pripona,
                 'plna' => "media/img/fotogalerie/fotky/" . $number . '.' . $pripona,
-                'zobrazit' => '1'
+                'zobrazit' => '1',
+                'razeni' => $number - 1
             ));
 
         }
