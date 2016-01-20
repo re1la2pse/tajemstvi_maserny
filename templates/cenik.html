@@ -1,0 +1,37 @@
+{include file='inc/header.html'}
+
+<div class="content">
+    <div class="container section">
+        <h3 class="center">Ceník</h3>
+
+        {foreach from=$kategorie item=kat}
+
+            <h3>{$kat['nazev']}</h3>
+
+            {foreach from=$kat['masaze'] item=masaz name=mLoop}
+
+                <div class="wrapper {if $masaz@iteration is odd}odd{else}even{/if}">
+                    <div class="name">
+                        <h4>{$masaz['nazev']}</h4>
+                    </div>
+                    <div class="price">
+                        <h4>{$masaz['cena']} Kč</h4>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+
+            {/foreach}
+        {/foreach}
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+{include file='inc/footer.html'}

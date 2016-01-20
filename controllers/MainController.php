@@ -50,6 +50,10 @@ class MainController {
             case "akce":
                 self::actions();
                 break;
+
+            case "cenik":
+                self::cenik();
+                break;
             
             //odesilani kontaktniho formulare
             case "contactForm":
@@ -170,6 +174,17 @@ class MainController {
         $smarty->display('akce.html');
         exit;
     }
+
+    public static function cenik() {
+
+        $smarty = Utils::smartyInit();
+
+        $smarty->assign('active_cenik', true);
+        $smarty->assign('kategorie', MassagesModel::getCategoriesWithMassages());
+        $smarty->assign('style', 'cenik_style');
+        $smarty->display('cenik.html');
+        exit;
+    }
     
     /**
      * Odesila kontaktni formular
@@ -189,7 +204,7 @@ class MainController {
 
         $mail->From = $email;
         $mail->FromName = $name;
-        $mail->AddAddress("petr.mokrusa@centrum.cz");
+        $mail->AddAddress("paclova.monika@seznam.cz");
 
         $mail->IsHTML(true);
         $mail->Subject = "Tajemství masérny - kontaktní formulář";
@@ -234,7 +249,7 @@ class MainController {
 
         $mail->From = $email;
         $mail->FromName = $jmeno;
-        $mail->AddAddress("petr.mokrusa@centrum.cz");
+        $mail->AddAddress("paclova.monika@seznam.cz");
 
         $mail->IsHTML(true);
         $mail->Subject = "Tajemství masérny - objednávka poukazu";

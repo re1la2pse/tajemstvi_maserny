@@ -1,0 +1,42 @@
+
+
+.section {
+    padding-top: 40px;
+}
+
+h3 {
+    margin: 30px 0 5px 50px;
+}
+
+.name {
+    float: left;
+}
+
+.name h4 {
+    color: #C2C2C2;
+}
+
+.price {
+    float: right;
+}
+
+.price h4 {
+    color: #C2C2C2;
+    text-transform: none;
+
+}
+
+.wrapper {
+    margin: 0 50px;
+    padding: 0 20px;
+    border-radius: 10px;
+    min-width: 300px;
+}
+
+.odd {
+    background-color: #800000;
+}
+
+/*.even {
+    background-color: #4d0000;
+}*/
