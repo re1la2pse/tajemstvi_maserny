@@ -92,10 +92,21 @@
     background-image: url('../img/voucher.png');
 }
 
-#fb-icon {
+#fb-icon-maserna {
     position: absolute;
     left: 100px;
     bottom: 130px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/fb-icon.png');
+   /* border: 1px solid blue;*/
+    margin-left: 100px;
+}
+
+#fb-icon-kosmetika {
+    position: absolute;
+    left: 120px;
+    bottom: 150px;
     width: 30px;
     height: 30px;
     background-image: url('../img/fb-icon.png');
@@ -117,10 +128,21 @@
 }
 
 @media(max-width:991px) {
-    #fb-icon {
+    #fb-icon-maserna {
         position: absolute;
         left: 100px;
         bottom: 170px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
+    }
+    
+    #fb-icon-kosmetika {
+        position: absolute;
+        left: 120px;
+        bottom: 210px;
         width: 30px;
         height: 30px;
         background-image: url('../img/fb-icon.png');
@@ -146,10 +168,21 @@
         z-index: 0;
     }
 
-    #fb-icon {
+    #fb-icon-maserna {
         position: absolute;
         left: 100px;
         bottom: 120px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
+    }
+    
+    #fb-icon-kosmetika {
+        position: absolute;
+        left: 120px;
+        bottom: 140px;
         width: 30px;
         height: 30px;
         background-image: url('../img/fb-icon.png');
