@@ -357,11 +357,13 @@ class MassagesModel extends Nette\Object {
 
     /**
      * @param $id
-     * vrati serazene ID masazi kategorie $id
+     * vrati serazene ID masazi dane kategorie $id
      */
     public function vratMasaze($id) {
-        $masazeDB = $this->db->table('masaze')->where('kategorie', $id)->select('id_masaze')->order('razeni');
+        $masazeDB = $this->db->table('masaze')->where('id_kategorie', $id)->order('razeni');
         $masaze = array();
+
+        //Debugger::fireLog($masazeDB);
 
         foreach ($masazeDB as $masazDB) {
             $masaze[] = $masazDB['id_masaze'];
@@ -380,10 +382,18 @@ class MassagesModel extends Nette\Object {
         $kategorieDB = $this->db->query($sql)->fetchAll();
         $seznam = array();
 
-        foreach ($kategorieDB as $katDB) {
-            $seznam += $this->vratMasaze($katDB['id_kategorie']);
-        }
+        //ebugger::fireLog($kategorieDB);
 
+        foreach ($kategorieDB as $katDB) {
+          //  Debugger::fireLog($seznam);
+            $masaze = $this->vratMasaze($katDB['id_kategorie']);
+           // Debugger::fireLog($masaze);
+            foreach ($masaze as $masaz) {
+                array_push($seznam, $masaz);
+            }
+          //  Debugger::fireLog($seznam);
+        }
+        //Debugger::fireLog($seznam);
         return $seznam;
     }
 
@@ -396,19 +406,15 @@ class MassagesModel extends Nette\Object {
 
         $newOrdering = explode(",", $newOrdering);
 
+        //Debugger::fireLog($newOrdering);
+
         $masazeId = $this->seznamMasazi();
+
+        //Debugger::fireLog($masazeId);
 
         for($i=0; $i < count($newOrdering); $i++) {
             $this->db->query("UPDATE masaze SET razeni=? WHERE id_masaze=?", $i, $masazeId[(int)$newOrdering[$i]]);
         }
-
-        $this->db->table('masaze')->insert(array(
-            'id_kategorie' => '55',
-            'nazev' => 'frwefgerw',
-            'popis' => 'fewfewf',
-            'obrazek' => 'NULL',
-            'razeni' => '55',
-        ));
 
     }
     /**

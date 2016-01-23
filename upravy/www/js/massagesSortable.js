@@ -33,7 +33,7 @@ $(function() {
 
     $("#sortable").disableSelection();
 
-   /* $("li > ul").sortable({containment: 'document', tolerance: 'pointer', cursor: 'pointer', opacity: 0.60, update:
+    $("li > ul").sortable({containment: 'document', tolerance: 'pointer', cursor: 'pointer', opacity: 0.60, update:
         function(event, ui) {
             var list = [];
             var tmp;
@@ -63,7 +63,7 @@ $(function() {
         }
     });
 
-    $("li > ul").disableSelection();*/
+    $("li > ul").disableSelection();
 
 });
 
