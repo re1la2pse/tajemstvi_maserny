@@ -437,5 +437,6 @@ class MassagesModel extends Nette\Object {
             $this->db->query("UPDATE kategorie_masazi SET razeni=? WHERE id_kategorie=?", $i, $kategorieId[(int)$newOrdering[$i]]);
         }
 
+        return 0;
     }
 }

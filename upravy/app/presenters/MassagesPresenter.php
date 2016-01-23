@@ -106,15 +106,19 @@ class MassagesPresenter extends BasePresenter {
         $this->redirect('Massages:spravaSortable');
     }
     /**
-     * Testovani razeni galerie
+     * Testovani razeni kategorii
      * handler odchytava ajaxove volani
      */
     public function handleChangeOrder($list) {
 
-        $this->massagesModel->changeOrder($list);
-
+        if ($this->massagesModel->changeOrder($list))
+            $this->redirect('this');
     }
 
+    /**
+     * @param $list
+     * razeni masazi
+     */
     public function handleChangeOrderMasaze($list) {
 
         $this->massagesModel->changeOrderMasaze($list);
