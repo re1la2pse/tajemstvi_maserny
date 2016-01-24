@@ -112,6 +112,7 @@ class MassagesPresenter extends BasePresenter {
     public function handleChangeOrder($list) {
 
         $this->massagesModel->changeOrder($list);
+	$this->redirect('Massages:spravaSortable');
 
     }
 
