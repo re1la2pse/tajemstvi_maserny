@@ -33,6 +33,19 @@
 }
 /* end slider */
 
+#kosmetikaLink {
+    width: 50px;
+    height: 200px;
+    /*background-color: green;*/
+    /*border: 1px solid red;*/
+    position: absolute;
+    top: 90px;
+    z-index: 99999;
+    background-image: url('../img/kosmetikaLink.png');
+    background-repeat: no-repeat;
+   /* box-shadow: 2px 2px 20px black;*/
+}
+
 #services .box {
   padding-bottom: 0;
 }
@@ -41,21 +54,10 @@
   margin-bottom: 50px;
 }
 
-/*
-#about_us {
-    position: relative;
-    z-index: 10;
-    margin-top: -100px;
-}*/
-
 #services {
     position: relative;
     z-index: 10;
     margin-top: -100px;
-}
-
-#uvodText {
-    
 }
 
 .obrazek:hover {
@@ -63,34 +65,6 @@
     opacity: 0.4;
 }
 
-/*** contact section ***/
-
-#contactSection {
-    text-align: left;
-}
-
-#contactSection ul {
-    margin-top: 30px;
-    list-style: none;
-}
-
-#contactSection .contactColumn h3 {
-    margin-left: 40px;
-}
-
-#contactSection .voucherColumn {
-   /* border: 1px solid green;*/
-}
-
-#voucher {
-   /* border: 1px solid blue;*/
-    border-radius: 10px;
-    width: 400px;
-    height: 100px;
-    margin-top: 30px;
-    background-color: darkred;
-    background-image: url('../img/voucher.png');
-}
 
 #fb-icon-maserna {
     position: absolute;

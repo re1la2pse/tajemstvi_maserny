@@ -146,7 +146,7 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
-        $smarty->assign('active_oleje', true);
+        $smarty->assign('active_masaze', true);
         $smarty->assign('style', 'oils_style');
         $smarty->assign('kategorie', OilsModel::getCategoriesWithOils());
 

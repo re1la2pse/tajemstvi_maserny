@@ -66,12 +66,12 @@
                                 <li><a href="{$ROOT}/{$kat['idNazev']}">{$kat['nazev']}</a></li>
                             {/foreach}
                             <li><a href="{$ROOT}/paroveMasaze">Párové masáže</a></li>
-                            <li><a href="{$ROOT}/darkovyPoukaz">Dárkové poukazy</a></li>
+                            <li><a href="{$ROOT}/oleje">Speciální oleje</a></li>
                         </ul>
                     </li>
-                    <li {if isset($active_oleje)}class="active"{/if}><a href="{$ROOT}/oleje">Speciální oleje</a></li>
-                    <li {if isset($active_kontakt)}class="active"{/if}><a href="{$ROOT}/kontakt">Kontakt</a></li>
+                    <li {if isset($active_poukaz)}class="active"{/if}><a href="{$ROOT}/darkovyPoukaz">Dárkový poukaz</a></li>
                     <li {if isset($active_cenik)}class="active"{/if}><a href="{$ROOT}/cenik">Ceník</a></li>
+                    <li {if isset($active_kontakt)}class="active"{/if}><a href="{$ROOT}/kontakt">Kontakt</a></li>
                 </ul>
             </div>
         </div>
