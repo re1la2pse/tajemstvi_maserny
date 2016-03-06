@@ -5,16 +5,22 @@ $(function() {
    var $paramArray = location.pathname.split("/");
    $paramArray.reverse();
    
-   if (/^idMasaze/.test($paramArray[0])) {
-        console.log("konkretni masaz");
-        $param = $paramArray[0].substring(8);
+   if (location.hash) {
+    console.log("je hash");
+   } else {
+        console.log("neni hash");
+   }
+   
+   //if (/\#idMasaze/.test($paramArray[0])) {
+   if (location.hash) {
+        console.log(location.hash);
+        $param = location.hash.substring(9); //chci jen to cislo na konci
         console.log($param);
         $('.massage').hide();
         $('#' + $param + 'm').show();
         $('#' + $param).addClass('active');
    } else {
-    
-        console.log("kategorie masazi");
+        console.log($paramArray[0]);
         $param = $paramArray[0];
 
         //schovam vsechny masaze a zobrazim jen prvni z dane kategorie
@@ -23,7 +29,10 @@ $(function() {
      
         //rozsvitim odkaz menu
         $('.' + $param + '1').addClass('active');
+        window.location.hash = "idMasaze" + $('.' + $param + '1m').attr('id').slice(0,-1); //nastavim hash to url
    }
+   
+   
    
    
    
@@ -52,6 +61,8 @@ $(function() {
           this_li.css('color', '#fed136');
           this_li.addClass('active');
       });
+      window.location.hash = "idMasaze" + id; //nastavim hash to url
+      
     });
 
 });
