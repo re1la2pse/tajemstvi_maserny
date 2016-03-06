@@ -89,6 +89,34 @@
     margin-left: 100px;
 }
 
+/*aktuality*/
+div.aktuality {
+    /*border: 1px solid blue;*/
+    height: auto;
+}
+
+div.aktualita {
+    /*border: 1px solid green;*/
+    padding: 0;
+    padding-left: 20px;
+    
+}
+
+.aktualita_obrazek {
+    border: 2px solid #fed136;
+}
+
+div.aktualita_part_img {
+    float: left;
+    /*border: 1px solid green;*/
+}
+
+div.aktualita_part_text {
+    float: left;
+    width: 280px;
+    padding-left: 10px;
+    /*border: 1px solid blue;*/
+}
 
 /****** @media ****/
 @media(max-width:1024px) {

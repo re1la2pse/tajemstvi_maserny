@@ -25,7 +25,8 @@
                         <h4>{$kat['nazev']}</h4>
                         <ul id="{$kat['idNazev']}" class="no_list_style">
                             {foreach from=$kat['masaze'] item=masaz name=mLoop}
-                                <li id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}" class="menu_item">{$masaz['nazev']}</li>
+                                <!--<li id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}" class="menu_item">{$masaz['nazev']}</li>-->
+                                <li id="{$masaz['id_masaze']}" class="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1} menu_item">{$masaz['nazev']}</li>
                             {/foreach}
                         </ul>
                     </div>
@@ -36,7 +37,8 @@
 
             {foreach from=$kategorie item=kat}
                 {foreach from=$kat['masaze'] item=masaz name=mLoop}
-                    <div id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}m" class="{$smarty.foreach.mLoop.index + 1}m massage">
+                    <!--<div id="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}m" class="{$smarty.foreach.mLoop.index + 1}m massage">-->
+                    <div id="{$masaz['id_masaze']}m" class="{$kat['idNazev']}{$smarty.foreach.mLoop.index + 1}m massage">
                         <div class="row">
                             <div class="col-lg-3 col-lg-offset-1 col2">
                                 <img src="{$ROOT}/{$masaz['obrazek']}" class="img-circle obrazek" width="150px" height="150px">
