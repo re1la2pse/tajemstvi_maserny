@@ -142,7 +142,17 @@ body {
 }
 
 .objBlok {
-    margin-top: 70px;
+    margin-top: 40px;
+    /*border: 1px solid red;*/
+}
+
+#downArrow {
+    width: 70px;
+    height: 70px;
+    /*border: 1px solid blue;*/
+    margin: 0 auto;
+    margin-top: 20px;
+    background-image: url('../img/arrowDown.png');
 }
 
 .formErrors p {

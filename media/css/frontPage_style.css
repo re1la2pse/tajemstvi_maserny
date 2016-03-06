@@ -33,6 +33,20 @@
 }
 /* end slider */
 
+#kosmetikaLink {
+    width: 50px;
+    height: 200px;
+    /*background-color: green;*/
+    /*border: 1px solid red;*/
+    position: absolute;
+    top: 90px;
+    right: 0;
+    z-index: 99999;
+    background-image: url('../img/kosmetikaLink.png');
+    background-repeat: no-repeat;
+   /* box-shadow: 2px 2px 20px black;*/
+}
+
 #services .box {
   padding-bottom: 0;
 }
@@ -41,21 +55,10 @@
   margin-bottom: 50px;
 }
 
-/*
-#about_us {
-    position: relative;
-    z-index: 10;
-    margin-top: -100px;
-}*/
-
 #services {
     position: relative;
     z-index: 10;
     margin-top: -100px;
-}
-
-#uvodText {
-    
 }
 
 .obrazek:hover {
@@ -63,36 +66,8 @@
     opacity: 0.4;
 }
 
-/*** contact section ***/
 
-#contactSection {
-    text-align: left;
-}
-
-#contactSection ul {
-    margin-top: 30px;
-    list-style: none;
-}
-
-#contactSection .contactColumn h3 {
-    margin-left: 40px;
-}
-
-#contactSection .voucherColumn {
-   /* border: 1px solid green;*/
-}
-
-#voucher {
-   /* border: 1px solid blue;*/
-    border-radius: 10px;
-    width: 400px;
-    height: 100px;
-    margin-top: 30px;
-    background-color: darkred;
-    background-image: url('../img/voucher.png');
-}
-
-#fb-icon {
+#fb-icon-maserna {
     position: absolute;
     left: 100px;
     bottom: 130px;
@@ -103,6 +78,45 @@
     margin-left: 100px;
 }
 
+#fb-icon-kosmetika {
+    position: absolute;
+    left: 120px;
+    bottom: 150px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../img/fb-icon.png');
+   /* border: 1px solid blue;*/
+    margin-left: 100px;
+}
+
+/*aktuality*/
+div.aktuality {
+    /*border: 1px solid blue;*/
+    height: auto;
+}
+
+div.aktualita {
+    /*border: 1px solid green;*/
+    padding: 0;
+    padding-left: 20px;
+    
+}
+
+.aktualita_obrazek {
+    border: 2px solid #fed136;
+}
+
+div.aktualita_part_img {
+    float: left;
+    /*border: 1px solid green;*/
+}
+
+div.aktualita_part_text {
+    float: left;
+    width: 280px;
+    padding-left: 10px;
+    /*border: 1px solid blue;*/
+}
 
 /****** @media ****/
 @media(max-width:1024px) {
@@ -117,10 +131,21 @@
 }
 
 @media(max-width:991px) {
-    #fb-icon {
+    #fb-icon-maserna {
         position: absolute;
         left: 100px;
         bottom: 170px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
+    }
+    
+    #fb-icon-kosmetika {
+        position: absolute;
+        left: 120px;
+        bottom: 210px;
         width: 30px;
         height: 30px;
         background-image: url('../img/fb-icon.png');
@@ -146,10 +171,21 @@
         z-index: 0;
     }
 
-    #fb-icon {
+    #fb-icon-maserna {
         position: absolute;
         left: 100px;
         bottom: 120px;
+        width: 30px;
+        height: 30px;
+        background-image: url('../img/fb-icon.png');
+        /* border: 1px solid blue;*/
+        margin-left: 100px;
+    }
+    
+    #fb-icon-kosmetika {
+        position: absolute;
+        left: 120px;
+        bottom: 140px;
         width: 30px;
         height: 30px;
         background-image: url('../img/fb-icon.png');

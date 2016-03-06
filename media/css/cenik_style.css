@@ -4,7 +4,7 @@
     padding-top: 40px;
 }
 
-h3 {
+h4.kategorie {
     margin: 30px 0 5px 50px;
 }
 
@@ -12,17 +12,21 @@ h3 {
     float: left;
 }
 
-.name h4 {
+.name p {
     color: #C2C2C2;
+    font-size: 11pt;
+    padding-top: 5px;
 }
 
 .price {
     float: right;
 }
 
-.price h4 {
+.price p {
     color: #C2C2C2;
     text-transform: none;
+    font-size: 11pt;
+    padding-top: 5px;
 
 }
 

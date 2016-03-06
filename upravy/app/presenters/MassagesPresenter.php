@@ -113,6 +113,7 @@ class MassagesPresenter extends BasePresenter {
 
         if ($this->massagesModel->changeOrder($list))
             $this->redirect('this');
+
     }
 
     /**
