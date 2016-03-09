@@ -12,10 +12,12 @@ use Nette;
 class IntroModel extends Nette\Object {
 
     private $db;
+    private $purify;
 
     public function __construct(Nette\Database\Context $database)
     {
         $this->db = $database;
+        $this->purify = new MyPurifier();
     }
 
     /**
@@ -85,5 +87,142 @@ class IntroModel extends Nette\Object {
                 }
             }
         }
+    }
+    /**
+     * Vlozi nebo edituje novinku
+     */
+    public function insertNovinka($values) {
+        //osetri vstup
+        $values['popis'] = $this->purify->purify($values['popis']);
+        //update masaze
+        if ($values['id_novinky']) {
+            //obrazek je
+            if ($values['picture'] != '') {
+                //smaze puvodni obrazek, protoze se neprepise obrazek s jinou priponou
+                $novinka = $this->db->table('novinky')->get($values['id_novinky']);
+                $novinka = $novinka->toArray();
+                if ($novinka['obrazek'] != 'NULL')
+                    unlink('../../' . $novinka['obrazek']);
+                //
+                $fileName = $values['picture']->getSanitizedName();
+                $pripona = pathinfo($fileName, PATHINFO_EXTENSION);
+                $Picture = $values['picture']->toImage();
+                $Picture->save('../../media/img/aktuality/' . $values['id_novinky'] . '.' . $pripona);
+                //vlozeni do DB
+                $this->db->table('novinky')
+                    ->where('id_novinky', $values['id_novinky'])
+                    ->update(array(
+                        'popis' => $values['popis'],
+                        'id_masaze' => $values['masaze'],
+                        'obrazek' => "media/img/aktuality/" . $values['id_novinky'] . '.' . $pripona,
+                    ));
+            }
+            else {
+                //vlozeni do DB
+                $this->db->table('novinky')
+                    ->where('id_novinky', $values['id_novinky'])
+                    ->update(array(
+                        'popis' => $values['popis'],
+                        'id_masaze' => $values['id_masaze'],
+                    ));
+            }
+        }
+        //nova masaz
+        else {
+            //ID do DB
+            if ($number = $this->db->table('novinky')->max('id_novinky'))
+                $number += 1;
+            else
+                $number = 1;
+
+            if ($values['picture'] != '') {
+                //je obrazek
+                $fileName = $values['picture']->getSanitizedName();
+                $pripona = pathinfo($fileName, PATHINFO_EXTENSION);
+                $Picture = $values['picture']->toImage();
+                $Picture->save('../../media/img/aktuality/' . $number . '.' . $pripona);
+                //vlozeni do DB
+                $this->db->table('novinky')->insert(array(
+                    'id_novinky' => $number,
+                    'popis' => $values['popis'],
+                    'obrazek' => "media/img/aktuality/" . $number . '.' . $pripona,
+                    'id_masaze' => $values['id_masaze'],
+                ));
+            }
+            else {
+                //neni obrazek
+                //vlozeni do DB
+                $this->db->table('novinky')->insert(array(
+                    'id_novinky' => $number,
+                    'popis' => $values['popis'],
+                    'obrazek' => 'NULL',
+                    'id_masaze' => $values['id_masaze'],
+                ));
+            }
+        }
+    }
+    /**
+     * Smaze novinku
+     */
+    public function deleteNovinka($values) {
+        $novinka = $this->db->table('novinky')->get($values['id_novinky']);
+        $novinka = $novinka->toArray();
+
+        if ($novinka['obrazek'] != 'NULL') {
+            unlink('../../' . $novinka['obrazek']);
+        }
+        $this->db->table('novinky')
+            ->where('id_novinky', $values['id_novinky'])
+            ->delete();
+    }
+    /**
+     * Nacte masaze
+     */
+    public function getMassages() {
+        return $this->db->table('masaze');
+    }
+    public  function getMassagesPole() {
+
+        $massages = $this->getMassages();
+
+        $mas = array();
+        $mas[-1] = "Žádná";
+
+        foreach ($massages as $m) {
+            $mas[$m['id_masaze']] = $m['nazev'];
+        }
+
+        return $mas;
+    }
+    /**
+     * Nacte novinky
+     */
+    public function getNovinky() {
+        $novinkyDB = $this->db->table('novinky');
+
+        $novinky = array();
+        $nechcu = array('<p>', '</p>');
+        $chcu = array('','');
+
+        foreach($novinkyDB as $novinka) {
+            $novinky[$novinka['id_novinky']] = str_replace($nechcu, $chcu, $novinka['popis']);
+        }
+
+        return $novinky;
+    }
+//nacte novinku z DB dle ID
+    public function getNovinku($id) {
+
+        $novinky = $this->db->table('novinky')
+            ->where('id_novinky', $id);
+        $pom = array();
+
+        foreach ($novinky as $novinka) {
+            $pom['id_novinky'] = $novinka['id_novinky'];
+            $pom['popis'] = $novinka['popis'];
+            $pom['id_masaze'] = $novinka['id_masaze'];
+        }
+
+        return $pom;
     }
 }

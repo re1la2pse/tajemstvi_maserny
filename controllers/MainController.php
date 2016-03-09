@@ -89,6 +89,7 @@ class MainController {
         $smarty->assign('active_unas', true);
         $smarty->assign('style', 'frontPage_style');
         $smarty->assign('photoses', IntroModel::getIntro());
+        $smarty->assign('news', IntroModel::getNews());
         $smarty->display('frontPage.html');
         exit;
         
