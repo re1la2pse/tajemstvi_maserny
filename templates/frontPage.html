@@ -79,7 +79,7 @@
                 <div class="row aktuality">
                     {foreach from=$news item=new name=ms}
                         <div class="col-lg-4 aktualita">
-                            {if isset($new['obrazek'])}
+                            {if isset($new['obrazek']) && $new['obrazek'] != 'NULL' }
                                 <div class="aktualita_part_img">
                                     {if isset($new['url'])}
                                         <a href="{$ROOT}/{$new['url']}">
@@ -90,6 +90,10 @@
                                     {if isset($new['url'])}
                                         </a>
                                     {/if}
+                                </div>
+                            {else}
+                                <div class="aktualita_part_img">
+                                    <img src="media/img/budha_logo.png" class="img-circle aktualita_obrazek" width="70px" height="70px">
                                 </div>
                             {/if}
 

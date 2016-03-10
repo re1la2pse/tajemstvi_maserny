@@ -8,6 +8,8 @@
 namespace App\Model;
 
 use Nette;
+use Tracy\Debugger;
+use Tracy;
 
 class IntroModel extends Nette\Object {
 
@@ -99,8 +101,18 @@ class IntroModel extends Nette\Object {
             //obrazek je
             if ($values['picture'] != '') {
                 //smaze puvodni obrazek, protoze se neprepise obrazek s jinou priponou
-                $novinka = $this->db->table('novinky')->get($values['id_novinky']);
-                $novinka = $novinka->toArray();
+
+
+                $news = $this->db->table('novinky')->where('id_novinky', $values['id_novinky'])->fetch();
+
+                //Debugger::fireLog( $news);
+
+                $novinka = array();
+                    $novinka['id_novinky'] = $news->id_novinky;
+                    $novinka['popis'] = $news->popis;
+                    $novinka['id_masaze'] = $news->id_masaze;
+                    $novinka['obrazek'] = $news->obrazek;
+
                 if ($novinka['obrazek'] != 'NULL')
                     unlink('../../' . $novinka['obrazek']);
                 //
@@ -113,7 +125,7 @@ class IntroModel extends Nette\Object {
                     ->where('id_novinky', $values['id_novinky'])
                     ->update(array(
                         'popis' => $values['popis'],
-                        'id_masaze' => $values['masaze'],
+                        'id_masaze' => $values['id_masaze'],
                         'obrazek' => "media/img/aktuality/" . $values['id_novinky'] . '.' . $pripona,
                     ));
             }
