@@ -23,7 +23,7 @@ class IntroModel {
 
         $pdo = Db_Data::getPDO();
 
-        $sql = "SELECT * FROM novinky LIMIT 3";
+        $sql = "SELECT * FROM novinky ORDER BY id_novinky DESC LIMIT 3";
 
         $q = $pdo->prepare($sql);
         $q->execute();
