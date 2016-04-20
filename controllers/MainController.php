@@ -85,6 +85,14 @@ class MainController {
 
         $smarty = Utils::smartyInit();
 
+        $uvodniOkno = false;
+        //nastavim coikies
+        if(!isset($_COOKIE['tmWelcomeDialog']) ||  time() > $_COOKIE['tmWelcomeDialog']) {
+            $uvodniOkno = true;
+            SetCookie("tmWelcomeDialog", time()+15*60);
+        }
+
+        $smarty->assign('uvodniOkno', $uvodniOkno);
         $smarty->assign('kategorie', MassagesModel::getCategories());
         $smarty->assign('active_unas', true);
         $smarty->assign('style', 'frontPage_style');
